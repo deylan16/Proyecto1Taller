@@ -3,6 +3,11 @@ Cedula:1234567
 Consecutivo:0
 Marca:CantidadxPrecio+= total
 
+<<<<<<< Updated upstream
 Blanquita:2x500+ 13% = 1130.0
 
 Monto total:1130.0
+=======
+
+Monto total:0
+>>>>>>> Stashed changes

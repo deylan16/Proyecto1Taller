@@ -164,7 +164,17 @@ def OpcionesComprar(cedula):
                 #registroTienda += [listaCompraCliente]
         menu()
             
-    
+def RevisarGondolas():
+    print("Estoy revisando gondolas")
+
+
+def VerificarInventario():
+    print("estoy en inventario")
+
+
+def Reportes():
+    print("Estoy en inventario")
+
     
 def menu():
     print("***********************")
@@ -180,10 +190,10 @@ def menu():
     elif(opcion == "2"):
         facturar()
     elif(opcion == "3"):
-        print("3")
+        RevisarGondolas()
     elif(opcion == "4"):
-        print("4")
+        VerificarInventario()
     elif(opcion == "5"):
-        print("5")
+        Reportes()
     
 menu()
