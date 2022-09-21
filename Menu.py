@@ -5,6 +5,7 @@ marcasProductos = CargarMarcaproductos(productosPasillo)
 inventarios = CargarInventario()
 clientes = CargarClientes()
 registroTienda = []
+RegistroTodasCompras = []
 consecutivo = 0
 ListaProductos = []
 def mostrarLista(lista):
@@ -46,7 +47,7 @@ def tiene13(codMarca):
     else:
         return False
 def facturar():
-    
+    global registroTienda,ListaProductos,RegistroTodasCompras
     if(len(registroTienda) != 0):
         facturando = registroTienda[0]
         factura = open("Archivos/"+facturando[0]+(str)(consecutivo) +".txt", "w")
@@ -64,6 +65,9 @@ def facturar():
   
             string = facturando[1][i][3]+ ":" +facturando[1][i][4] + "x" + facturando[1][i][5]
             ListaProductos += [[facturando[1][i][2],facturando[1][i][4]]]
+            productoMarca1 = buscaEnLista(marcasProductos,facturando[1][i][2],2)
+            marcasProductos[productoMarca1][4] = (str)((int)(marcasProductos[productoMarca1][4])-(int)(facturando[1][i][4]))
+            
             if (tiene13(facturando[1][i][2]) ):
                 string += "+ 13% = "
                 total = ((int)(facturando[1][i][4])*(int)(facturando[1][i][5]))* 1.13
@@ -81,6 +85,9 @@ def facturar():
         factura.write("\n")
         factura.write("Monto total:"+ (str)(precioTotal) + "\n")
         factura.close()
+        RegistroTodasCompras += registroTienda[0]
+        registroTienda = registroTienda[1:]
+        
         menu()
     else:
         print("No hay facturas pendientes")
