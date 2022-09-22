@@ -173,15 +173,17 @@ def RevisarGondolas():
     for producto in marcasProductos:
         cantidadGondola=(int)(producto[4])
         if cantidadGondola<=2:
-           cantidadGondola+=10
+           cantidadSumar=input("Digite la cantidad que desea sumar")
+           cantidadSumar=(int)(cantidadSumar)
+           cantidadGondola+=cantidadSumar
            producto[4]=cantidadGondola
            indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
-           inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-10)
+           inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-cantidadSumar)
     print("----------------")
     mostrarLista(marcasProductos)
     print("----------------")
     mostrarLista(inventarios)
-    print("Estoy revisando gondolas")
+    menu()
     
 
    
