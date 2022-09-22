@@ -1,0 +1,8 @@
+Nombre:Juan Perez
+Cedula:1234567
+Consecutivo:0
+Marca:CantidadxPrecio+= total
+
+Luisiana:5x1000 = 5000
+
+Monto total:5000

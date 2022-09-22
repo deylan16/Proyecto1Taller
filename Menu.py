@@ -165,14 +165,38 @@ def OpcionesComprar(cedula):
         menu()
             
 def RevisarGondolas():
+    inventarios = CargarInventario()
+    print(inventarios)
     print("Estoy revisando gondolas")
 
+   
 
 def VerificarInventario():
-    print("estoy en inventario")
+    if(buscaEnLista(productosPasillo,ListaProductos,20) != 0):
+        print("Si cumple con la cantidad adecuada de productos")
+        CargarInventario(inventarios)
+    else:
+        print("No cumple con la cantidad adecuada de productos")
+        print("***********************")
+        print("1.volver a intentar")
+        print("2.volver al menu")
+        print("***********************")
+        opcion = input('¿digital el numero de la opcion?')
+        if(opcion == "1"):
+            verificaComprar()
+        elif(opcion == "2"):
+            menu()
+
+
+
+
+
 
 
 def Reportes():
+    
+    RegistroTodasCompras
+    print(RegistroTodasCompras)
     print("Estoy en inventario")
 
     
