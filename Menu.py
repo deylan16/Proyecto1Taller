@@ -190,27 +190,17 @@ def RevisarGondolas():
    
 
 def VerificarInventario():
-    if(buscaEnLista(ListaProductos,productosPasillo,20) != 0):
-        print("Si cumple con la cantidad adecuada de productos")
-        CargarInventario(inventarios)
-    else:
-        print("No cumple con la cantidad adecuada de productos")
-        print("***********************")
-        print("1.volver a intentar")
-        print("2.volver al menu")
-        print("***********************")
-        opcion = input('¿digital el numero de la opcion?')
-        if(opcion == "1"):
-            verificaComprar()
-        elif(opcion == "2"):
-            menu()
-
-
-
-
-
-
-
+    mostrarLista(inventarios)
+    for Productos in inventarios:
+        CantidadStock=(int)(Producto[4])
+        if CantidadStock<=20:
+            CantidadSumar=input("Ingrese la cantidad que desea sumar")
+            CantidadSumar=(int)(CantidadSumar)
+            CantidadStock+=CantidadSumar
+            Producto[4]=CantidadStock
+    mostrarLista(inventarios)
+    menu()
+    
 def Reportes():
     
     RegistroTodasCompras
