@@ -173,6 +173,7 @@ def RevisarGondolas():
     for producto in marcasProductos:
         cantidadGondola=(int)(producto[4])
         if cantidadGondola<=2:
+           print("El producto "+ producto[2]+":"+producto[3]+" tiene pocas unidades")
            cantidadSumar=input("Digite la cantidad que desea sumar")
            cantidadSumar=(int)(cantidadSumar)
            cantidadGondola+=cantidadSumar
