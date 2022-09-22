@@ -176,7 +176,7 @@ def RevisarGondolas():
            cantidadGondola+=10
            producto[4]=cantidadGondola
            indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
-           inventario[indiceproductoinventario][4]=(str)(cantidadGondola)
+           inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-10)
     print("----------------")
     mostrarLista(marcasProductos)
     print("----------------")
