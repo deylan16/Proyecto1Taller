@@ -165,14 +165,23 @@ def OpcionesComprar(cedula):
         menu()
             
 def RevisarGondolas():
-    inventarios = CargarInventario()
-    print(inventarios)
+    marcasProductos = CargarMarcaproductos(productosPasillo) 
+    mostrarLista(marcasProductos)
+    for producto in marcasProductos:
+        cantidadGondola=(int)(producto[4])
+        if cantidadGondola<=2:
+           cantidadGondola+=10
+           producto[4]=cantidadGondola
+           indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
+           inventario[indiceproductoinventario][4]=(str)(cantidadGondola)
+    mostrarLista(marcasProductos)
     print("Estoy revisando gondolas")
+    
 
    
 
 def VerificarInventario():
-    if(buscaEnLista(productosPasillo,ListaProductos,20) != 0):
+    if(buscaEnLista(ListaProductos,productosPasillo,20) != 0):
         print("Si cumple con la cantidad adecuada de productos")
         CargarInventario(inventarios)
     else:
