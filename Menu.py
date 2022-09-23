@@ -347,8 +347,9 @@ def Reportes():
             elif(opcion == "8"):
                 print("***********************")
                 print("Cliente que más facturo:")
-
+                print(moda(ClientesFacturados))
                 continue
+            
             elif(opcion == "9"):
                 print("***********************")
                 print("Marcas de un producto:")
@@ -362,19 +363,30 @@ def Reportes():
             elif(opcion == "11"):
                 print("***********************")
                 print("Productos de un pasillo:")
+                mostrarLista(productosPasillo)
                 continue
             elif(opcion == "12"):
                 print("***********************")
                 print("Clientes del supermercado:")
-
+                mostrarLista(clientes)
                 continue 
             elif(opcion == "13"):
                 print("***********************")
                 print("Pasillos del supermercado:")
+                mostrarLista(pasillos) 
                 continue 
             elif(opcion == "14"):
                 print("***********************")
                 print("Inventario del supermercado:")
+                mostrarLista(inventarios)
+            else:
+                print("1.Desea volver a intentar")
+                print("2.Volver al menu")
+                print("***********************")
+                if(opcion == "1"):
+                    continue 
+                elif(opcion == "2"):
+                    break
     menu()
         
     
