@@ -1,0 +1,8 @@
+Nombre:Jose Ramirez
+Cedula:1290738
+Consecutivo:0
+Marca:CantidadxPrecio+= total
+
+Luisiana:2x1000 = 2000
+
+Monto total:2000

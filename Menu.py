@@ -109,8 +109,13 @@ def facturar():
         factura.write("\n")
         factura.write("Monto total:"+ (str)(precioTotal) + "\n")
         #######para reportes#####
-        ClientesMontoComprados += [[facturando[0],precioTotal]]
+        indiceClienteMonto = buscaEnLista(ClientesMontoComprados,facturando[0],0)
+        if(indiceClienteMonto != -1):
+            ClientesMontoComprados[indiceClienteMonto][1] = ClientesMontoComprados[indiceClienteMonto][1] + precioTotal
+        else:
+            ClientesMontoComprados += [[facturando[0],precioTotal]]
         ClientesFacturados += [facturando[0]]
+        print(ClientesMontoComprados)
         FacturaMontoRealizadas += [[facturando[0]+(str)(consecutivo),precioTotal]]
         #########################
         factura.close()
@@ -195,6 +200,7 @@ def OpcionesComprar(cedula):
         menu()
             
 def RevisarGondolas():
+    global ProductoCantidaCargados
     marcasProductos = CargarMarcaproductos(productosPasillo) 
     print("----------------")
     mostrarLista(marcasProductos)
@@ -207,8 +213,12 @@ def RevisarGondolas():
            cantidadSumar=input("Digite la cantidad que desea sumar")
            cantidadSumar=(int)(cantidadSumar)
            ######para reportes######
-            
-           ProductoCantidaCargados += [[producto[2],cantidadSumar]]
+           indiceClienteMonto = buscaEnLista(ProductoCantidaCargados,producto[2],0)
+           if(indiceClienteMonto != -1):
+                ProductoCantidaCargados[indiceClienteMonto][1] = ProductoCantidaCargados[indiceClienteMonto][1] + cantidadSumar
+           else:
+                ProductoCantidaCargados += [[producto[2],cantidadSumar]]
+           ##ProductoCantidaCargados += [[producto[2],cantidadSumar]]
            #########################
            cantidadGondola+=cantidadSumar
            producto[4]=cantidadGondola
@@ -282,13 +292,34 @@ def Hagalista(lista,llave,indice):
             result += [i[1]]
     return result
            
-    
-
+def montosFactutados(lista):
+    monto = 0
+    resultado = []
+    for n in lista:
+        if((int)(n[1]) > monto):
+            monto = (int)(n[1])
+            resultado = [n]
+        elif((int)(n[1]) == monto):
+            
+            resultado += [n]
+    return resultado
+def montosFactutadosmenos(lista):
+    monto = montosFactutados(lista)[0][1]
+    resultado = []
+    for n in lista:
+        if((int)(n[1]) < monto):
+            monto = (int)(n[1])
+            resultado = [n]
+        elif((int)(n[1]) == monto):
+            
+            resultado += [n]
+    return resultado
 def Reportes():
     while ( True):
             if RegistroTodasCompras==[]:
                 print("No se ha facturado nada")
-                break
+                print("En este estado solo funcionan algunos reportes")
+            
             print("***********************")
             print("1.Pasillo mas visitado")
             print("2.Pasillo menos visitado")
@@ -345,17 +376,19 @@ def Reportes():
             elif(opcion == "5"):
                 print("***********************")
                 print("Cliente que más compro:")
+                print(montosFactutados(ClientesMontoComprados))
 
                 continue
             elif(opcion == "6"):
                 print("***********************")
-                print("Cliente que menos compro:")
+                print(montosFactutadosmenos(ClientesMontoComprados))
 
             
                 continue
             elif(opcion == "7"):
                 print("***********************")
                 print("Producto que más se cargó en las Góndolas:")
+                print(montosFactutados(ProductoCantidaCargados))
 
                 continue
             elif(opcion == "8"):
@@ -371,6 +404,8 @@ def Reportes():
             elif(opcion == "10"):
                 print("***********************")
                 print("Factura de mayor monto:")
+                print(montosFactutados(FacturaMontoRealizadas))
+                
 
                 continue
             elif(opcion == "11"):
