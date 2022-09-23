@@ -1,8 +1,0 @@
-Nombre:Juan Perez
-Cedula:1234567
-Consecutivo:0
-Marca:CantidadxPrecio+= total
-
-Kerns:6x150+ 13% = 1016.9999999999999
-
-Monto total:1016.9999999999999
