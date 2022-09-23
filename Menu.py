@@ -61,7 +61,8 @@ def tiene13(codMarca):
     else:
         return False
 def facturar():
-    global registroTienda,ListaProductos,RegistroTodasCompras
+    global registroTienda,ListaProductos,RegistroTodasCompras,pasillosComprados,PasilloProductosComprados,MarcasCompradas,ClientesMontoComprados
+    global ProductoCantidaCargados,ClientesFacturados,FacturaMontoRealizadas
     if(len(registroTienda) != 0):
         facturando = registroTienda[0]
         factura = open("Archivos/"+facturando[0]+(str)(consecutivo) +".txt", "w")
@@ -155,11 +156,13 @@ def OpcionesComprar(cedula):
             elif(opcion == "4"):
                 print("***********************")
                 print("Comprando")
-                codigoProducto = input('Ingrese el codigo del producto que desea comprar')
-                if(buscaEnLista(productosPasillo,codigoProducto,1) != -1):
+                codigoProducto = input('Ingrese el codigo de la marca que desea comprar')
+                if(buscaEnLista(marcasProductos,codigoProducto,2) != -1):
                     cantidadProducto = input('Ingrese la cantidad que desea comprar')
-                    posicion = buscaEnLista(productosPasillo,codigoProducto,1)
+                    posicion = buscaEnLista(marcasProductos,codigoProducto,2)
                     productoscomprados += [[marcasProductos[posicion][0],marcasProductos[posicion][1],marcasProductos[posicion][2],marcasProductos[posicion][3],cantidadProducto,marcasProductos[posicion][5]]]
+                    print("-----------------------------")
+                    mostrarLista(productoscomprados)
                     continue
                 else:
                     print("El producto no se encuentra registrado")
@@ -261,11 +264,8 @@ def modaInversa(lista):
     return modas
 
 def Reportes():
-        while (True):
+    while ( True):
             print("***********************")
-            if(RegistroTodasCompras != 0):
-                print("No se ha facturado ninguna compra")
-                break
             print("1.Pasillo mas visitado")
             print("2.Pasillo menos visitado")
             print("3.Productos por pasillo mas vendido")
@@ -280,7 +280,7 @@ def Reportes():
             print("12.Clientes del supermercado")
             print("13.Pasillos del supermercado")
             print("14.Inventario del supermercado")
-            
+
             print("***********************")
             opcion = input('¿digital el numero de la opcion?')
             if(opcion == "1"):
@@ -342,6 +342,7 @@ def Reportes():
             elif(opcion == "12"):
                 print("***********************")
                 print("Clientes del supermercado:")
+
                 continue 
             elif(opcion == "13"):
                 print("***********************")
@@ -350,7 +351,6 @@ def Reportes():
             elif(opcion == "14"):
                 print("***********************")
                 print("Inventario del supermercado:")
-        menu()
         
     
 

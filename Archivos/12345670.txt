@@ -3,6 +3,8 @@ Cedula:1234567
 Consecutivo:0
 Marca:CantidadxPrecio+= total
 
-Luisiana:5x1000 = 5000
+Luisiana:2x1000 = 2000
+Blanquita:3x500+ 13% = 1694.9999999999998
+Rojitos:1x1500+ 13% = 1694.9999999999998
 
-Monto total:5000
+Monto total:5390.0
