@@ -204,8 +204,8 @@ def RevisarGondolas():
            cantidadSumar=(int)(cantidadSumar)
            ######para reportes######
             
-            ProductoCantidaCargados = [producto[2],cantidadSumar]
-            #########################
+           ProductoCantidaCargados = [producto[2],cantidadSumar]
+           #########################
            cantidadGondola+=cantidadSumar
            producto[4]=cantidadGondola
            indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
@@ -261,8 +261,11 @@ def modaInversa(lista):
     return modas
 
 def Reportes():
-    while (true):
-        print("***********************")
+        while (True):
+            print("***********************")
+            if(RegistroTodasCompras != 0):
+                print("No se ha facturado ninguna compra")
+                break
             print("1.Pasillo mas visitado")
             print("2.Pasillo menos visitado")
             print("3.Productos por pasillo mas vendido")
@@ -277,7 +280,7 @@ def Reportes():
             print("12.Clientes del supermercado")
             print("13.Pasillos del supermercado")
             print("14.Inventario del supermercado")
-
+            
             print("***********************")
             opcion = input('¿digital el numero de la opcion?')
             if(opcion == "1"):
@@ -339,8 +342,7 @@ def Reportes():
             elif(opcion == "12"):
                 print("***********************")
                 print("Clientes del supermercado:")
-
-               continue 
+                continue 
             elif(opcion == "13"):
                 print("***********************")
                 print("Pasillos del supermercado:")
@@ -348,6 +350,7 @@ def Reportes():
             elif(opcion == "14"):
                 print("***********************")
                 print("Inventario del supermercado:")
+        menu()
         
     
 
