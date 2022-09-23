@@ -37,9 +37,9 @@ def buscaEnLista(lista,dato,indice):
     return -1
 
 def verificaComprar():
-        cedula = input('¿digital tu cedula?')
+        cedula = input('¿Digite su cedula?')
         if(buscaEnLista(clientes,cedula,0) != -1):
-            print("El clientes esta registrado")
+            print("El cliente esta registrado")
             OpcionesComprar(cedula)
         else:
             print("El cliente no esta registrado")
@@ -47,7 +47,7 @@ def verificaComprar():
             print("1.volver a intentar")
             print("2.volver al menu")
             print("***********************")
-            opcion = input('¿digital el numero de la opcion?')
+            opcion = input('¿digite el numero de la opcion?')
             if(opcion == "1"):
                 verificaComprar()
             elif(opcion == "2"):
@@ -412,7 +412,14 @@ def Reportes():
                 print("***********************")
                 print("Productos de un pasillo:")
                 mostrarLista(productosPasillo)
+                BuscarPasillo=input("Ingrese el pasillo que desea buscar")
+                indice=buscaEnLista(productosPasillo,BuscarPasillo,0)
+                if indice!=-1:
+                    mostrarLista(productosPasillo[indice])
+                else:
+                    print("El pasillo no esta")
                 continue
+            
             elif(opcion == "12"):
                 print("***********************")
                 print("Clientes del supermercado:")
@@ -460,7 +467,7 @@ def menu():
     print("4.Verificar inventario")
     print("5.Reportes")
     print("***********************")
-    opcion = input('¿digital el numero de la opcion?')
+    opcion = input('¿digite el numero de la opcion?')
     if(opcion == "1"):
         verificaComprar()
     elif(opcion == "2"):
