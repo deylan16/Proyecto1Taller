@@ -86,7 +86,8 @@ def facturar():
             productoComprando = facturando[1][i]
 
             pasillosComprados += [productoComprando[0]]
-            PasilloProductosComprados = [productoComprando[0],productoComprando[1]]
+            for i in range((int)(facturando[1][i][5])):
+                PasilloProductosComprados = [productoComprando[0],productoComprando[1]]
             MarcasCompradas = [productoComprando[2]]
             
             
@@ -263,8 +264,23 @@ def modaInversa(lista):
 
     return modas
 
+
+######para reportes######
+#pasillosComprados = []
+#PasilloProductosComprados = []
+#MarcasCompradas = []
+#ClientesMontoComprados = []
+#ProductoCantidaCargados = []
+#ClientesFacturados = []
+#FacturaMontoRealizadas = []
+#########################
+
+
 def Reportes():
     while ( True):
+            if RegistroTodasCompras==[]:
+                print("No se ha facturado nada")
+                break
             print("***********************")
             print("1.Pasillo mas visitado")
             print("2.Pasillo menos visitado")
@@ -286,18 +302,26 @@ def Reportes():
             if(opcion == "1"):
                 print("***********************")
                 print("Pasillo más visitado:")
-                
-
+                print(moda(pasillosComprados))
                 continue
+            
             elif(opcion == "2"):
                 print("***********************")
                 print("Pasillo menos visitado:")
-                
+                print(modaInversa(pasillosComprados))
                 continue
+            
             elif(opcion == "3"):
                 print("***********************")
                 print("Productos por pasillo más vendidos:")
-                
+                mostrarLista(pasillos)
+                buscarpasillo=input("Ingrese el pasillo que desea buscar")
+                if buscaEnLista(pasillos,buscarpasillo,0)!=-1:
+                    monstrarLista(PasilloProductosComprados)
+                    print(moda(PasilloProductosComprados))
+                else:
+                    print("El pasillo no esta")
+                    
                 continue
             elif(opcion == "4"):
                 print("***********************")
@@ -351,6 +375,7 @@ def Reportes():
             elif(opcion == "14"):
                 print("***********************")
                 print("Inventario del supermercado:")
+    menu()
         
     
 
