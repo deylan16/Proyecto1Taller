@@ -86,8 +86,8 @@ def facturar():
             productoComprando = facturando[1][i]
 
             pasillosComprados += [productoComprando[0]]
-            for j in range((int)(facturando[1][i][5])):
-                PasilloProductosComprados += [[productoComprando[0],productoComprando[1]]]
+            for j in range((int)(facturando[1][i][4])):
+                PasilloProductosComprados += [[productoComprando[0],productoComprando[3]]]
             MarcasCompradas += [productoComprando[2]]
             
             
@@ -274,7 +274,15 @@ def modaInversa(lista):
 #ClientesFacturados = []
 #FacturaMontoRealizadas = []
 #########################
-
+def Hagalista(lista,llave,indice):
+    result = []
+    for i in lista:
+        
+        if(i[indice] == llave):
+            result += [i[1]]
+    return result
+           
+    
 
 def Reportes():
     while ( True):
@@ -317,8 +325,12 @@ def Reportes():
                 mostrarLista(pasillos)
                 buscarpasillo=input("Ingrese el pasillo que desea buscar")
                 if buscaEnLista(pasillos,buscarpasillo,0)!=-1:
-                    mostrarLista(PasilloProductosComprados)
-                    print(moda(PasilloProductosComprados))
+                    
+                    resultado = ""
+                    
+                   
+                    print("El producto mas comprado del pasillo "+buscarpasillo+" es:"+resultado)
+                    print(moda(Hagalista(PasilloProductosComprados,buscarpasillo,0)))
                 else:
                     print("El pasillo no esta")
                     
@@ -326,6 +338,8 @@ def Reportes():
             elif(opcion == "4"):
                 print("***********************")
                 print("Marcas más vendidos:")
+                print(moda(MarcasCompradas))
+                continue
 
                 continue
             elif(opcion == "5"):
@@ -347,9 +361,8 @@ def Reportes():
             elif(opcion == "8"):
                 print("***********************")
                 print("Cliente que más facturo:")
-                print(moda(ClientesFacturados))
+
                 continue
-            
             elif(opcion == "9"):
                 print("***********************")
                 print("Marcas de un producto:")
