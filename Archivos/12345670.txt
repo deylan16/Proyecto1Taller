@@ -1,0 +1,10 @@
+Nombre:Juan Perez
+Cedula:1234567
+Consecutivo:0
+Marca:CantidadxPrecio+= total
+
+Luisiana:4x1000 = 4000
+Blanquita:3x500+ 13% = 1694.9999999999998
+Rojitos:2x1500+ 13% = 3389.9999999999995
+
+Monto total:9085.0

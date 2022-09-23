@@ -86,9 +86,9 @@ def facturar():
             productoComprando = facturando[1][i]
 
             pasillosComprados += [productoComprando[0]]
-            for i in range((int)(facturando[1][i][5])):
-                PasilloProductosComprados = [productoComprando[0],productoComprando[1]]
-            MarcasCompradas = [productoComprando[2]]
+            for j in range((int)(facturando[1][i][5])):
+                PasilloProductosComprados += [[productoComprando[0],productoComprando[1]]]
+            MarcasCompradas += [productoComprando[2]]
             
             
             #################
@@ -109,9 +109,9 @@ def facturar():
         factura.write("\n")
         factura.write("Monto total:"+ (str)(precioTotal) + "\n")
         #######para reportes#####
-        ClientesMontoComprados = [facturando[0],precioTotal]
-        ClientesFacturados = [facturando[0]]
-        FacturaMontoRealizadas = [facturando[0]+(str)(consecutivo),precioTotal]
+        ClientesMontoComprados += [[facturando[0],precioTotal]]
+        ClientesFacturados += [facturando[0]]
+        FacturaMontoRealizadas += [[facturando[0]+(str)(consecutivo),precioTotal]]
         #########################
         factura.close()
         RegistroTodasCompras += registroTienda[0]
@@ -208,7 +208,7 @@ def RevisarGondolas():
            cantidadSumar=(int)(cantidadSumar)
            ######para reportes######
             
-           ProductoCantidaCargados = [producto[2],cantidadSumar]
+           ProductoCantidaCargados += [[producto[2],cantidadSumar]]
            #########################
            cantidadGondola+=cantidadSumar
            producto[4]=cantidadGondola
@@ -317,7 +317,7 @@ def Reportes():
                 mostrarLista(pasillos)
                 buscarpasillo=input("Ingrese el pasillo que desea buscar")
                 if buscaEnLista(pasillos,buscarpasillo,0)!=-1:
-                    monstrarLista(PasilloProductosComprados)
+                    mostrarLista(PasilloProductosComprados)
                     print(moda(PasilloProductosComprados))
                 else:
                     print("El pasillo no esta")
