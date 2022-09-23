@@ -9,6 +9,19 @@ registroTienda = []
 RegistroTodasCompras = []
 consecutivo = 0
 ListaProductos = []
+
+
+
+######para reportes######
+pasillosComprados = []
+PasilloProductosComprados = []
+MarcasCompradas = []
+ClientesMontoComprados = []
+ProductoCantidaCargados = []
+ClientesFacturados = []
+FacturaMontoRealizadas = []
+#########################
+
 def mostrarLista(lista):
     i =0
     while(i < len(lista)):
@@ -68,7 +81,15 @@ def facturar():
             ListaProductos += [[facturando[1][i][2],facturando[1][i][4]]]
             productoMarca1 = buscaEnLista(marcasProductos,facturando[1][i][2],2)
             marcasProductos[productoMarca1][4] = (str)((int)(marcasProductos[productoMarca1][4])-(int)(facturando[1][i][4]))
+            #####para #######
+            productoComprando = facturando[1][i]
+
+            pasillosComprados += [productoComprando[0]]
+            PasilloProductosComprados = [productoComprando[0],productoComprando[1]]
+            MarcasCompradas = [productoComprando[2]]
             
+            
+            #################
             if (tiene13(facturando[1][i][2]) ):
                 string += "+ 13% = "
                 total = ((int)(facturando[1][i][4])*(int)(facturando[1][i][5]))* 1.13
@@ -85,6 +106,11 @@ def facturar():
             i+= 1
         factura.write("\n")
         factura.write("Monto total:"+ (str)(precioTotal) + "\n")
+        #######para reportes#####
+        ClientesMontoComprados = [facturando[0],precioTotal]
+        ClientesFacturados = [facturando[0]]
+        FacturaMontoRealizadas = [facturando[0]+(str)(consecutivo),precioTotal]
+        #########################
         factura.close()
         RegistroTodasCompras += registroTienda[0]
         registroTienda = registroTienda[1:]
@@ -176,6 +202,10 @@ def RevisarGondolas():
            print("El producto "+ producto[2]+":"+producto[3]+" tiene pocas unidades")
            cantidadSumar=input("Digite la cantidad que desea sumar")
            cantidadSumar=(int)(cantidadSumar)
+           ######para reportes######
+            
+            ProductoCantidaCargados = [producto[2],cantidadSumar]
+            #########################
            cantidadGondola+=cantidadSumar
            producto[4]=cantidadGondola
            indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
@@ -200,10 +230,37 @@ def VerificarInventario():
             Producto[4]=CantidadStock
     mostrarLista(inventarios)
     menu()
-    
+
+
+
+def moda(lista):
+    frecuencia = {}
+
+    for valor in lista:
+        frecuencia[valor] = frecuencia.get(valor, 0) + 1
+
+    masFrecuentes = max(frecuencia.values())
+
+    modas = [key for key, valor in frecuencia.items()
+                      if valor == masFrecuentes]
+
+    return modas
+ 
+
+def modaInversa(lista):
+    frecuencia = {}
+
+    for valor in lista:
+        frecuencia[valor] = frecuencia.get(valor, 0) + 1
+
+    menosFrecuentes = min(frecuencia.values())
+
+    modas = [key for key, valor in frecuencia.items()
+                      if valor == menosFrecuentes]
+
+    return modas
+
 def Reportes():
-    
-    RegistroTodasCompras
     while (true):
         print("***********************")
             print("1.Pasillo mas visitado")
@@ -226,6 +283,7 @@ def Reportes():
             if(opcion == "1"):
                 print("***********************")
                 print("Pasillo más visitado:")
+                
 
                 continue
             elif(opcion == "2"):
