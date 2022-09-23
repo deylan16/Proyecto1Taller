@@ -204,8 +204,106 @@ def VerificarInventario():
 def Reportes():
     
     RegistroTodasCompras
-    print(RegistroTodasCompras)
-    print("Estoy en inventario")
+    while (true):
+        print("***********************")
+            print("1.Pasillo mas visitado")
+            print("2.Pasillo menos visitado")
+            print("3.Productos por pasillo mas vendido")
+            print("4.Marcas mas vendidas")
+            print("5.Cliente que mas compro")
+            print("6.Cliente que menos compro")
+            print("7.Producto que mas se cargo en las Gondolas")
+            print("8.Cliente que mas facturo")
+            print("9.Marcas de un producto")
+            print("10.Factura de mayor monto")
+            print("11.Productos de un pasillo")
+            print("12.Clientes del supermercado")
+            print("13.Pasillos del supermercado")
+            print("14.Inventario del supermercado")
+
+            print("***********************")
+            opcion = input('¿digital el numero de la opcion?')
+            if(opcion == "1"):
+                print("***********************")
+                print("Pasillo más visitado:")
+
+                continue
+            elif(opcion == "2"):
+                print("***********************")
+                print("Pasillo menos visitado:")
+                
+                continue
+            elif(opcion == "3"):
+                print("***********************")
+                print("Productos por pasillo más vendidos:")
+                
+                continue
+            elif(opcion == "4"):
+                print("***********************")
+                print("Marcas más vendidos:")
+
+                continue
+            elif(opcion == "5"):
+                print("***********************")
+                print("Cliente que más compro:")
+
+                continue
+            elif(opcion == "6"):
+                print("***********************")
+                print("Cliente que menos compro:")
+
+            
+                continue
+            elif(opcion == "7"):
+                print("***********************")
+                print("Producto que más se cargó en las Góndolas:")
+
+                continue
+            elif(opcion == "8"):
+                print("***********************")
+                print("Cliente que más facturo:")
+
+                continue
+            elif(opcion == "9"):
+                print("***********************")
+                print("Marcas de un producto:")
+
+                continue
+            elif(opcion == "10"):
+                print("***********************")
+                print("Factura de mayor monto:")
+
+                continue
+            elif(opcion == "11"):
+                print("***********************")
+                print("Productos de un pasillo:")
+                continue
+            elif(opcion == "12"):
+                print("***********************")
+                print("Clientes del supermercado:")
+
+               continue 
+            elif(opcion == "13"):
+                print("***********************")
+                print("Pasillos del supermercado:")
+                continue 
+            elif(opcion == "14"):
+                print("***********************")
+                print("Inventario del supermercado:")
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
     
 def menu():
