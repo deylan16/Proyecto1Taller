@@ -95,3 +95,10 @@ def CargarInventario():
 
 
 
+pasillos = CargarPasillos()
+productosPasillo = CargarProductospasillo(pasillos)
+marcasProductos = CargarMarcaproductos(productosPasillo)
+inventarios = CargarInventario()
+clientes = CargarClientes()
+
+print(marcasProductos)

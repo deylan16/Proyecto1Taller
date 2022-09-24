@@ -394,11 +394,26 @@ def Reportes():
             elif(opcion == "8"):
                 print("***********************")
                 print("Cliente que más facturo:")
+                print(moda(ClientesFacturados))
 
                 continue
             elif(opcion == "9"):
                 print("***********************")
                 print("Marcas de un producto:")
+                mostrarLista(productosPasillo)
+                BuscarPasillo=input("Ingrese el pasillo que desea buscar")
+                indice=buscaEnLista(productosPasillo,BuscarPasillo,0)
+                if indice!=-1:
+                    BuscarProducto=input("Ingrese el producto que desea buscar")
+                    indice2=buscaEnLista(productosPasillo,BuscarProducto,1)
+                    if indice2!=-1:
+                        for p in marcasProductos:
+                            if (BuscarPasillo == p[0]  and BuscarProducto ==p[1] ):
+                                print(p)
+                    else:
+                        print("El producto no esta")
+                else:
+                    print("El pasillo no esta")
 
                 continue
             elif(opcion == "10"):
@@ -415,6 +430,8 @@ def Reportes():
                 BuscarPasillo=input("Ingrese el pasillo que desea buscar")
                 indice=buscaEnLista(productosPasillo,BuscarPasillo,0)
                 if indice!=-1:
+                    
+                    indice=buscaEnLista(productosPasillo,BuscarPasillo,0)
                     mostrarLista(productosPasillo[indice])
                 else:
                     print("El pasillo no esta")
