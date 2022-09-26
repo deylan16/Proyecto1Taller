@@ -198,52 +198,74 @@ def OpcionesComprar(cedula):
                 #listaCompraCliente += [productoscomprados]
                 #registroTienda += [listaCompraCliente]
         menu()
+
+def admministrador():
+    while(True):
+        contraseña = input('Digite la contraseña de administador')
+        if(contraseña == "Admin"):
+            return True
+        else:
+            print("Contraseña Incorrecta")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                break
+    menu()
+        
             
 def RevisarGondolas():
-    global ProductoCantidaCargados
-    marcasProductos = CargarMarcaproductos(productosPasillo) 
-    print("----------------")
-    mostrarLista(marcasProductos)
-    print("----------------")
-    mostrarLista(inventarios)
-    for producto in marcasProductos:
-        cantidadGondola=(int)(producto[4])
-        if cantidadGondola<=2:
-           print("El producto "+ producto[2]+":"+producto[3]+" tiene pocas unidades")
-           cantidadSumar=input("Digite la cantidad que desea sumar")
-           cantidadSumar=(int)(cantidadSumar)
-           ######para reportes######
-           indiceClienteMonto = buscaEnLista(ProductoCantidaCargados,producto[2],0)
-           if(indiceClienteMonto != -1):
-                ProductoCantidaCargados[indiceClienteMonto][1] = ProductoCantidaCargados[indiceClienteMonto][1] + cantidadSumar
-           else:
-                ProductoCantidaCargados += [[producto[2],cantidadSumar]]
-           ##ProductoCantidaCargados += [[producto[2],cantidadSumar]]
-           #########################
-           cantidadGondola+=cantidadSumar
-           producto[4]=cantidadGondola
-           indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
-           inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-cantidadSumar)
-    print("----------------")
-    mostrarLista(marcasProductos)
-    print("----------------")
-    mostrarLista(inventarios)
-    menu()
+    if(admministrador()):
+        global ProductoCantidaCargados
+        marcasProductos = CargarMarcaproductos(productosPasillo) 
+        print("----------------")
+        mostrarLista(marcasProductos)
+        print("----------------")
+        mostrarLista(inventarios)
+        for producto in marcasProductos:
+            cantidadGondola=(int)(producto[4])
+            if cantidadGondola<=2:
+               print("El producto "+ producto[2]+":"+producto[3]+" tiene pocas unidades")
+               cantidadSumar=input("Digite la cantidad que desea sumar")
+               cantidadSumar=(int)(cantidadSumar)
+               ######para reportes######
+               indiceClienteMonto = buscaEnLista(ProductoCantidaCargados,producto[2],0)
+               if(indiceClienteMonto != -1):
+                    ProductoCantidaCargados[indiceClienteMonto][1] = ProductoCantidaCargados[indiceClienteMonto][1] + cantidadSumar
+               else:
+                    ProductoCantidaCargados += [[producto[2],cantidadSumar]]
+               ##ProductoCantidaCargados += [[producto[2],cantidadSumar]]
+               #########################
+               cantidadGondola+=cantidadSumar
+               producto[4]=cantidadGondola
+               indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
+               inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-cantidadSumar)
+        print("----------------")
+        mostrarLista(marcasProductos)
+        print("----------------")
+        mostrarLista(inventarios)
+        menu()
     
 
    
 
 def VerificarInventario():
-    mostrarLista(inventarios)
-    for Productos in inventarios:
-        CantidadStock=(int)(Producto[4])
-        if CantidadStock<=20:
-            CantidadSumar=input("Ingrese la cantidad que desea sumar")
-            CantidadSumar=(int)(CantidadSumar)
-            CantidadStock+=CantidadSumar
-            Producto[4]=CantidadStock
-    mostrarLista(inventarios)
-    menu()
+    if(admministrador()):
+        mostrarLista(inventarios)
+        for Productos in inventarios:
+            CantidadStock=(int)(Productos[4])
+            if CantidadStock<=20:
+                print("El producto "+ Productos[2]+":"+Productos[3]+" tiene pocas unidades")
+                CantidadSumar=input("Ingrese la cantidad que desea sumar")
+                CantidadSumar=(int)(CantidadSumar)
+                CantidadStock+=CantidadSumar
+                Productos[4]=CantidadStock
+        mostrarLista(inventarios)
+        menu()
 
 
 
@@ -335,6 +357,7 @@ def Reportes():
             print("12.Clientes del supermercado")
             print("13.Pasillos del supermercado")
             print("14.Inventario del supermercado")
+            print("15.Volver al menu")
 
             print("***********************")
             opcion = input('¿digital el numero de la opcion?')
@@ -451,13 +474,18 @@ def Reportes():
                 print("***********************")
                 print("Inventario del supermercado:")
                 mostrarLista(inventarios)
+
+            elif(opcion == "15"):
+                break
+                    
             else:
                 print("1.Desea volver a intentar")
                 print("2.Volver al menu")
                 print("***********************")
-                if(opcion == "1"):
+                opcion2 = input('¿digital el numero de la opcion?')
+                if(opcion2 == "1"):
                     continue 
-                elif(opcion == "2"):
+                elif(opcion2 == "2"):
                     break
     menu()
         
