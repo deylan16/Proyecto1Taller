@@ -61,6 +61,9 @@ def tiene13(codMarca):
     else:
         return False
 def facturar():
+    print("----------------------------------")
+    print("Se esta factaurando")
+    print("----------------------------------")
     global registroTienda,ListaProductos,RegistroTodasCompras,pasillosComprados,PasilloProductosComprados,MarcasCompradas,ClientesMontoComprados
     global ProductoCantidaCargados,ClientesFacturados,FacturaMontoRealizadas
     if(len(registroTienda) != 0):
@@ -115,7 +118,7 @@ def facturar():
         else:
             ClientesMontoComprados += [[facturando[0],precioTotal]]
         ClientesFacturados += [facturando[0]]
-        print(ClientesMontoComprados)
+        #print(ClientesMontoComprados)
         FacturaMontoRealizadas += [[facturando[0]+(str)(consecutivo),precioTotal]]
         #########################
         factura.close()
@@ -130,6 +133,9 @@ def facturar():
 
 
 def OpcionesComprar(cedula):
+        print("----------------------------------")
+        print("Estas comprando")
+        print("----------------------------------")
         listaCompraCliente = [cedula]
         productoscomprados = []
         while (True):
@@ -219,13 +225,19 @@ def admministrador():
         
             
 def RevisarGondolas():
+    print("----------------------------------")
+    print("Estas Revisando Gondolas")
+    print("----------------------------------")
     if(admministrador()):
         global ProductoCantidaCargados
         marcasProductos = CargarMarcaproductos(productosPasillo) 
         print("----------------")
+        print("Lista de gondolas")
         mostrarLista(marcasProductos)
         print("----------------")
+        print("Lista del inventario")
         mostrarLista(inventarios)
+        print("----------------")
         for producto in marcasProductos:
             cantidadGondola=(int)(producto[4])
             if cantidadGondola<=2:
@@ -245,7 +257,10 @@ def RevisarGondolas():
                indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
                inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-cantidadSumar)
         print("----------------")
+        print("Lista de gondolas")
         mostrarLista(marcasProductos)
+        print("----------------")
+        print("Lista del inventario")
         print("----------------")
         mostrarLista(inventarios)
         menu()
@@ -254,6 +269,9 @@ def RevisarGondolas():
    
 
 def VerificarInventario():
+    print("----------------------------------")
+    print("Estas Revisando Inventario")
+    print("----------------------------------")
     if(admministrador()):
         mostrarLista(inventarios)
         for Productos in inventarios:
@@ -337,6 +355,9 @@ def montosFactutadosmenos(lista):
             resultado += [n]
     return resultado
 def Reportes():
+    print("----------------------------------")
+    print("Estas en la seccion de reportes")
+    print("----------------------------------")
     while ( True):
             if RegistroTodasCompras==[]:
                 print("No se ha facturado nada")
@@ -505,6 +526,9 @@ def Reportes():
 
     
 def menu():
+    print("----------------------------------")
+    print("Estas en el menu principal")
+    print("----------------------------------")
     print("***********************")
     print("1.Comprar")
     print("2.Facturar")

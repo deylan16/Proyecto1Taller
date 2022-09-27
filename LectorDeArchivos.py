@@ -101,4 +101,3 @@ marcasProductos = CargarMarcaproductos(productosPasillo)
 inventarios = CargarInventario()
 clientes = CargarClientes()
 
-print(marcasProductos)
