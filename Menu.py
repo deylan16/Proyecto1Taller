@@ -35,7 +35,12 @@ def buscaEnLista(lista,dato,indice):
             return i
         i += 1
     return -1
-
+def verificaNumero(n):
+    numeros = ["1","2","3","4","5","6","7","8","9","0"]
+    for i in range(len(n)):
+        if (not(n[i] in numeros)):
+            return False
+    return True
 def verificaComprar():
         cedula = input('¿Digite su cedula?')
         if(buscaEnLista(clientes,cedula,0) != -1):
@@ -51,6 +56,9 @@ def verificaComprar():
             if(opcion == "1"):
                 verificaComprar()
             elif(opcion == "2"):
+                menu()
+            else:
+                print("El dato ingresado no es permitido")
                 menu()
 
 def tiene13(codMarca):
@@ -171,34 +179,52 @@ def OpcionesComprar(cedula):
                 codigoProducto = input('Ingrese el codigo de la marca que desea comprar')
                 if(buscaEnLista(marcasProductos,codigoProducto,2) != -1):
                     cantidadProducto = input('Ingrese la cantidad que desea comprar')
-                    posicion = buscaEnLista(marcasProductos,codigoProducto,2)
-                    productoscomprados += [[marcasProductos[posicion][0],marcasProductos[posicion][1],marcasProductos[posicion][2],marcasProductos[posicion][3],cantidadProducto,marcasProductos[posicion][5]]]
-                    print("-----------------------------")
-                    mostrarLista(productoscomprados)
-                    continue
+                    if(verificaNumero(cantidadProducto)):
+                        posicion = buscaEnLista(marcasProductos,codigoProducto,2)
+                        if ((int)(cantidadProducto) <= (int)(marcasProductos[posicion][4])):
+                            
+                            productoscomprados += [[marcasProductos[posicion][0],marcasProductos[posicion][1],marcasProductos[posicion][2],marcasProductos[posicion][3],cantidadProducto,marcasProductos[posicion][5]]]
+                            print("-----------------------------")
+                            mostrarLista(productoscomprados)
+                            continue
+                        else:
+                            print("No tenemos esa cantidad en gondola")
+                            continue
+                    else:
+                        print("El dato ingresado es erroneo")
+                        continue
                 else:
                     print("El producto no se encuentra registrado")
                     continue
             elif(opcion == "5"):
                 print("***********************")
                 print("Eliminando productos")
+                if(len(productoscomprados) > 0):
                 
-                mostrarLista(productoscomprados)
-                productoeliminar = input('Ingrese el codigo del producto que desea eliminar')
-                posicion = (buscaEnLista(productoscomprados,productoeliminar,1))
-                if(posicion != -1):
-                    print("eliminado")
+                    mostrarLista(productoscomprados)
+                    productoeliminar = input('Ingrese el codigo de la marca que desea que desea eliminar')
+                    posicion = (buscaEnLista(productoscomprados,productoeliminar,2))
+                    if(posicion != -1):
+                        productoscomprados.pop(posicion)
+                        print("eliminado")
+                    else:
+                        print("Ese producto no esta en tu lista de compras")
+                        continue
                 else:
-                    print("Ese producto no esta en tu lista de compras")
+                    print("No tienes productos en tu carrito")
                     continue
             elif(opcion == "6"):
                 print("Cancelando producto")
                 break
             elif(opcion == "7"):
                 global registroTienda
-                listaCompraCliente += [productoscomprados]
-                registroTienda += [listaCompraCliente]
-                print(registroTienda)
+                if(len(productoscomprados) > 0):
+                    listaCompraCliente += [productoscomprados]
+                    registroTienda += [listaCompraCliente]
+##                    print(registroTienda)
+
+                else:
+                    print("No compraste nada")
 
                 break
                 #listaCompraCliente += [productoscomprados]
@@ -241,21 +267,29 @@ def RevisarGondolas():
         for producto in marcasProductos:
             cantidadGondola=(int)(producto[4])
             if cantidadGondola<=2:
-               print("El producto "+ producto[2]+":"+producto[3]+" tiene pocas unidades")
-               cantidadSumar=input("Digite la cantidad que desea sumar")
-               cantidadSumar=(int)(cantidadSumar)
-               ######para reportes######
-               indiceClienteMonto = buscaEnLista(ProductoCantidaCargados,producto[2],0)
-               if(indiceClienteMonto != -1):
-                    ProductoCantidaCargados[indiceClienteMonto][1] = ProductoCantidaCargados[indiceClienteMonto][1] + cantidadSumar
-               else:
-                    ProductoCantidaCargados += [[producto[2],cantidadSumar]]
-               ##ProductoCantidaCargados += [[producto[2],cantidadSumar]]
-               #########################
-               cantidadGondola+=cantidadSumar
-               producto[4]=cantidadGondola
-               indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
-               inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-cantidadSumar)
+                while(True):
+                   print("El producto "+ producto[2]+":"+producto[3]+" tiene pocas unidades")
+                   cantidadSumar=input("Digite la cantidad que desea sumar")
+                   
+                   if(verificaNumero(cantidadSumar)):
+                           cantidadSumar=(int)(cantidadSumar)
+                           ######para reportes######
+                           indiceClienteMonto = buscaEnLista(ProductoCantidaCargados,producto[2],0)
+                           if(indiceClienteMonto != -1):
+                                ProductoCantidaCargados[indiceClienteMonto][1] = ProductoCantidaCargados[indiceClienteMonto][1] + cantidadSumar
+                           else:
+                                ProductoCantidaCargados += [[producto[2],cantidadSumar]]
+                           ##ProductoCantidaCargados += [[producto[2],cantidadSumar]]
+                           #########################
+                           cantidadGondola+=cantidadSumar
+                           producto[4]=cantidadGondola
+                           indiceproductoinventario=buscaEnLista(inventarios,producto[2],2)
+                           inventarios[indiceproductoinventario][4]=(str)((int)(inventarios[indiceproductoinventario][4])-cantidadSumar)
+                           break
+                   else:
+                        print("El dato ingresado es erroneo")
+                        continue
+               
         print("----------------")
         print("Lista de gondolas")
         mostrarLista(marcasProductos)
@@ -277,11 +311,18 @@ def VerificarInventario():
         for Productos in inventarios:
             CantidadStock=(int)(Productos[4])
             if CantidadStock<=20:
-                print("El producto "+ Productos[2]+":"+Productos[3]+" tiene pocas unidades")
-                CantidadSumar=input("Ingrese la cantidad que desea sumar")
-                CantidadSumar=(int)(CantidadSumar)
-                CantidadStock+=CantidadSumar
-                Productos[4]=CantidadStock
+                while(True):
+                    print("El producto "+ Productos[2]+":"+Productos[3]+" tiene pocas unidades")
+                    CantidadSumar=input("Ingrese la cantidad que desea sumar")
+                    if(verificaNumero(CantidadSumar)):
+                        CantidadSumar=(int)(CantidadSumar)
+                    
+                        CantidadStock+=CantidadSumar
+                        Productos[4]=CantidadStock
+                        break
+                    else:
+                        print("El dato ingresado es erroneo")
+                        continue
         mostrarLista(inventarios)
         menu()
 
@@ -359,9 +400,7 @@ def Reportes():
     print("Estas en la seccion de reportes")
     print("----------------------------------")
     while ( True):
-            if RegistroTodasCompras==[]:
-                print("No se ha facturado nada")
-                print("En este estado solo funcionan algunos reportes")
+            
             
             print("***********************")
             print("1.Pasillo mas visitado")
@@ -383,52 +422,82 @@ def Reportes():
             print("***********************")
             opcion = input('¿digital el numero de la opcion?')
             if(opcion == "1"):
-                print("***********************")
-                print("Pasillo más visitado:")
-                print(moda(pasillosComprados))
-                continue
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
+                    
+                    continue
+                else:
+                    print("***********************")
+                    print("Pasillo más visitado:")
+                    print(moda(pasillosComprados))
+                    continue
             
             elif(opcion == "2"):
-                print("***********************")
-                print("Pasillo menos visitado:")
-                print(modaInversa(pasillosComprados))
-                continue
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
+                    
+                    continue
+                else:
+                    print("***********************")
+                    print("Pasillo menos visitado:")
+                    print(modaInversa(pasillosComprados))
+                    continue
             
             elif(opcion == "3"):
-                print("***********************")
-                print("Productos por pasillo más vendidos:")
-                mostrarLista(pasillos)
-                buscarpasillo=input("Ingrese el pasillo que desea buscar")
-                if buscaEnLista(pasillos,buscarpasillo,0)!=-1:
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
                     
-                    resultado = ""
-                    
-                   
-                    print("El producto mas comprado del pasillo "+buscarpasillo+" es:"+resultado)
-                    print(moda(Hagalista(PasilloProductosComprados,buscarpasillo,0)))
+                    continue
                 else:
-                    print("El pasillo no esta")
-                    
-                continue
+                    print("***********************")
+                    print("Productos por pasillo más vendidos:")
+                    mostrarLista(pasillos)
+                    buscarpasillo=input("Ingrese el pasillo que desea buscar")
+                    if buscaEnLista(pasillos,buscarpasillo,0)!=-1:
+                        
+                        resultado = ""
+                        
+                       
+                        print("El producto mas comprado del pasillo "+buscarpasillo+" es:"+resultado)
+                        print(moda(Hagalista(PasilloProductosComprados,buscarpasillo,0)))
+                    else:
+                        print("El pasillo no esta")
+                        
+                    continue
             elif(opcion == "4"):
-                print("***********************")
-                print("Marcas más vendidos:")
-                print(moda(MarcasCompradas))
-                continue
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
+                    
+                    continue
+                else:
+                    print("***********************")
+                    print("Marcas más vendidos:")
+                    print(moda(MarcasCompradas))
+                    continue
 
-                continue
+                
             elif(opcion == "5"):
-                print("***********************")
-                print("Cliente que más compro:")
-                print(montosFactutados(ClientesMontoComprados))
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
+                    
+                    continue
+                else:
+                    print("***********************")
+                    print("Cliente que más compro:")
+                    print(montosFactutados(ClientesMontoComprados))
 
-                continue
+                    continue
             elif(opcion == "6"):
-                print("***********************")
-                print(montosFactutadosmenos(ClientesMontoComprados))
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
+                    
+                    continue
+                else:
+                    print("***********************")
+                    print(montosFactutadosmenos(ClientesMontoComprados))
 
-            
-                continue
+                
+                    continue
             elif(opcion == "7"):
                 print("***********************")
                 print("Producto que más se cargó en las Góndolas:")
@@ -436,11 +505,16 @@ def Reportes():
 
                 continue
             elif(opcion == "8"):
-                print("***********************")
-                print("Cliente que más facturo:")
-                print(moda(ClientesFacturados))
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
+                    
+                    continue
+                else:
+                    print("***********************")
+                    print("Cliente que más facturo:")
+                    print(moda(ClientesFacturados))
 
-                continue
+                    continue
             elif(opcion == "9"):
                 print("***********************")
                 print("Marcas de un producto:")
@@ -461,12 +535,17 @@ def Reportes():
 
                 continue
             elif(opcion == "10"):
-                print("***********************")
-                print("Factura de mayor monto:")
-                print(montosFactutados(FacturaMontoRealizadas))
-                
+                if RegistroTodasCompras==[]:
+                    print("No se ha facturado nada")
+                    
+                    continue
+                else:
+                    print("***********************")
+                    print("Factura de mayor monto:")
+                    print(montosFactutados(FacturaMontoRealizadas))
+                    
 
-                continue
+                    continue
             elif(opcion == "11"):
                 print("***********************")
                 print("Productos de un pasillo:")
@@ -508,6 +587,9 @@ def Reportes():
                     continue 
                 elif(opcion2 == "2"):
                     break
+                else:
+                    print("El dato ingresado no es permitido")
+                    break
     menu()
         
     
@@ -547,5 +629,8 @@ def menu():
         VerificarInventario()
     elif(opcion == "5"):
         Reportes()
+    else:
+        print("El dato ingresado no es permitido")
+        menu()
     
 menu()
