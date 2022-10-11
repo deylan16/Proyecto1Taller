@@ -92,12 +92,11 @@ def CargarInventario():
     inventario = lector("Archivos/Inventario.txt",2)
     return inventario
 
+def CargarAdministradores():
+    administradores = lector("Archivos/Administradores.txt",0);
+    return clientes
 
 
+print(CargarAdministradores())
 
-pasillos = CargarPasillos()
-productosPasillo = CargarProductospasillo(pasillos)
-marcasProductos = CargarMarcaproductos(productosPasillo)
-inventarios = CargarInventario()
-clientes = CargarClientes()
 
