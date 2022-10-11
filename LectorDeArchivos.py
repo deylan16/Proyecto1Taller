@@ -97,6 +97,6 @@ def CargarAdministradores():
     return administradores
 
 
-print(CargarAdministradores())
+
 
 

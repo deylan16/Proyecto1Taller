@@ -687,6 +687,30 @@ def menuClienteRegistrado():
     print("----------------------------------")
     print("Estas en el menu de cliente registrado")
     print("----------------------------------")
+    print("1.Consultar precio")
+    print("2.Consultar Descuento")
+    print("3.Consultar Productos")
+    print("4.Comprar")
+    print("5.volver al menu inicial")
+    print("***********************")
+    opcion = input('¿digite el numero de la opcion?')
+    if(opcion == "1"):
+        print("Consultando precio")
+    elif(opcion == "2"):
+        print("Consultando Descuentos")
+    elif(opcion == "3"):
+        print("Consultando productos")
+    elif(opcion == "4"):
+        print("Comprando")
+    
+    elif(opcion == "5"):
+        menuQuienEntra()
+    
+    
+    else:
+        print("El dato ingresado no es permitido")
+        menuClienteNoRegistrado()
+    print("----------------------------------")
 
 def menuClienteNoRegistrado():
     print("----------------------------------")
