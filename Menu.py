@@ -9,7 +9,7 @@ registroTienda = []
 RegistroTodasCompras = []
 consecutivo = 0
 ListaProductos = []
-
+Administradores =  CargarAdministradores()
 
 
 ######para reportes######
@@ -61,6 +61,35 @@ def verificaComprar():
                 print("El dato ingresado no es permitido")
                 menu()
 
+
+def verificaComprar():
+        cedula = input('¿Digite su cedula?')
+        if(buscaEnLista(clientes,cedula,0) != -1):
+            print("El cliente esta registrado")
+            menuClienteRegistrado()
+        else:
+            menuClienteNoRegistrado()
+def verificaAdministrador():
+        codigo = input('¿Digite su codigo de administrador?')
+        if(buscaEnLista(Administradores,codigo,0) != -1):
+            print("El Administrador esta registrado")
+            menuAdministrador()
+            
+        else:
+            print("El Administrador no esta registrado")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                verificaComprar()
+            elif(opcion == "2"):
+                menuQuienEntra()
+            else:
+                print("El dato ingresado no es permitido")
+                menuQuienEntra()
+    
 def tiene13(codMarca):
     posicion = buscaEnLista(inventarios,codMarca,2)
     
@@ -634,5 +663,56 @@ def menu():
     else:
         print("El dato ingresado no es permitido")
         menu()
+
+def menuQuienEntra():
+    print("----------------------------------")
+    print("Estas en el menu para elejir quien entra")
+    print("----------------------------------")
+    print("***********************")
+    print("1.Administrador")
+    print("2.Cliente")
     
-menu()
+    print("***********************")
+    opcion = input('¿digite el numero de la opcion?')
+    if(opcion == "1"):
+        verificaAdministrador()
+    elif(opcion == "2"):
+        verificaComprar()
+    
+    else:
+        print("El dato ingresado no es permitido")
+        menuQuienEntra()
+
+def menuClienteRegistrado():
+    print("----------------------------------")
+    print("Estas en el menu de cliente registrado")
+    print("----------------------------------")
+
+def menuClienteNoRegistrado():
+    print("----------------------------------")
+    print("Estas en el menu de cliente no registrado")
+    print("***********************")
+    print("1.Consultar precio")
+    print("2.Consultar Productos")
+    print("3.volver al menu inicial")
+    print("***********************")
+    opcion = input('¿digite el numero de la opcion?')
+    if(opcion == "1"):
+        print("Consultando precio")
+    elif(opcion == "2"):
+        print("Consultando productos")
+    elif(opcion == "3"):
+        menuQuienEntra()
+    
+    
+    else:
+        print("El dato ingresado no es permitido")
+        menuClienteNoRegistrado()
+    print("----------------------------------")
+
+def menuAdministrador():
+    print("----------------------------------")
+    print("Estas en el menu de administrador")
+    print("----------------------------------")
+    
+menuQuienEntra()

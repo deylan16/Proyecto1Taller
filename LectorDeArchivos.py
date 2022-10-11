@@ -94,7 +94,7 @@ def CargarInventario():
 
 def CargarAdministradores():
     administradores = lector("Archivos/Administradores.txt",0);
-    return clientes
+    return administradores
 
 
 print(CargarAdministradores())
