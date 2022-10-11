@@ -92,7 +92,9 @@ def facturar():
             string = facturando[1][i][3]+ ":" +facturando[1][i][4] + "x" + facturando[1][i][5]
             ListaProductos += [[facturando[1][i][2],facturando[1][i][4]]]
             productoMarca1 = buscaEnLista(marcasProductos,facturando[1][i][2],2)
+            print(marcasProductos[productoMarca1][4] )
             marcasProductos[productoMarca1][4] = (str)((int)(marcasProductos[productoMarca1][4])-(int)(facturando[1][i][4]))
+            print(marcasProductos[productoMarca1][4] )
             #####para #######
             productoComprando = facturando[1][i]
 
@@ -256,7 +258,7 @@ def RevisarGondolas():
     print("----------------------------------")
     if(admministrador()):
         global ProductoCantidaCargados
-        marcasProductos = CargarMarcaproductos(productosPasillo) 
+        
         print("----------------")
         print("Lista de gondolas")
         mostrarLista(marcasProductos)

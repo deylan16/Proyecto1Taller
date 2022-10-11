@@ -1,0 +1,7 @@
+Nombre:Juan Perez
+Cedula:1234567
+Consecutivo:0
+Marca:CantidadxPrecio+= total
+
+
+Monto total:0

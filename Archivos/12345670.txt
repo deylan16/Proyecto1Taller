@@ -3,5 +3,6 @@ Cedula:1234567
 Consecutivo:0
 Marca:CantidadxPrecio+= total
 
+Luisiana:1x1000 = 1000
 
-Monto total:0
+Monto total:1000

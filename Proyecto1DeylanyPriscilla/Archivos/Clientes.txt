@@ -1,0 +1,4 @@
+Cedula; Nombre;Telefono;Correo
+1234567;Juan Perez;23658974;juanpq@gmail.com
+1290738;Jose Ramirez;23658911;jram45@gmail.com
+2345678;Ana Campos;1134667;ancamp5@gmail.com
