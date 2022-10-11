@@ -737,6 +737,48 @@ def menuClienteNoRegistrado():
 def menuAdministrador():
     print("----------------------------------")
     print("Estas en el menu de administrador")
-    print("----------------------------------")
-    
+    print("*********************************")
+    print("1.Mantenimiento de la Base de Datos")
+    print("\ta.Insertatar Producto nuevo")
+    print("\tb.Eliminar un Producto")
+    print("\tc.Modificar un producto de una marca,modificando el precio o el nombre")
+    print("\td.Consultar Precio")
+    print("\te.Consultar Descuento")
+    print("\tf.Modicar el Descuento")
+    print("\tg.Registrar Clientes")
+    print("2.Facturar")
+    print("3.Revisar góndolas")
+    print("4.Verificar inventario")
+    print("5.Reportes")
+    print("6.Volver al menu principal")
+    print("***********************")
+    opcion =input('¿digite el numero de la opcion?')
+    if (opcion=="1"):
+        print("Mantenimiento de la Base de Datos")
+    elif (opcion=="a"):
+        print("Insertatar Producto nuevo")
+    elif (opcion=="b"):
+        print("Eliminar un Producto")
+    elif (opcion=="c"):
+        print("Modificar un producto de una marca,modificando el precio o el nombre")
+    elif (opcion=="d"):
+        print("Consultar Precio")
+    elif (opcion=="e"):
+        print("Consultar Descuento")
+    elif (opcion=="f"):
+        print("Modicar el Descuento")
+    elif (opcion=="g"):
+        print("Registrar Clientes")
+    elif (opcion=="2"):
+        facturar()
+    elif (opcion=="3"):
+        RevisarGondolas()
+    elif (opcion=="4"):
+        VerificarInventario()
+    elif (opcion=="5"):
+        Reportes()
+    elif (opcion=="6"):
+        menuAdmimnistrador()
+    else:
+        print("El dato ingresado no es permitido")    
 menuQuienEntra()
