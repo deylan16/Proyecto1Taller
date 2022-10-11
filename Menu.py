@@ -35,6 +35,19 @@ def buscaEnLista(lista,dato,indice):
             return i
         i += 1
     return -1
+def buscaEnLista2(lista,dato,indice):
+    i =0
+   
+    listaR = []
+    
+    
+    while(i < len(lista)):
+        
+        if(lista[i][indice] == dato):
+            listaR +=[lista[i]]
+        i += 1
+    return listaR
+
 def verificaNumero(n):
     numeros = ["1","2","3","4","5","6","7","8","9","0"]
     for i in range(len(n)):
@@ -624,12 +637,99 @@ def Reportes():
     menu()
         
     
+##########################################################
+    
+        
+def consultarPrecio():
+    mostrarLista(marcasProductos)
+    while(True):
+        codigoPasillo = input('¿Digite su codigo del pasillo')
+        listaCodigoPasillo = buscaEnLista2(marcasProductos,codigoPasillo,0)
+        mostrarLista(listaCodigoPasillo)
+        
+        if(listaCodigoPasillo != []):
+            codigoProducto = input('¿Digite su codigo del producto')
+            listaCodigoPasilloCodigoProducto = buscaEnLista2(listaCodigoPasillo,codigoProducto,1)
+            mostrarLista(listaCodigoPasilloCodigoProducto)
+            if(listaCodigoPasilloCodigoProducto != []):
+                codigoMarca = input('¿Digite su codigo de Marca')
+                listaCodigoPasilloCodigoMarca = buscaEnLista2(listaCodigoPasilloCodigoProducto,codigoMarca,2)
+                if(listaCodigoPasilloCodigoMarca != []):
+                    print(listaCodigoPasilloCodigoMarca[0][5])
+                    
+                    return -1
+                else:
+                    print("codigo incorrecto")
+                    print("***********************")
+                    print("1.volver a intentar")
+                    print("2.volver al menu")
+                    print("***********************")
+                    opcion = input('¿digite el numero de la opcion?')
+                    if(opcion == "1"):
+                        continue
+                    elif(opcion == "2"):
+                        return -1
+                    else:
+                        return -1   
+
+            else:
+                print("codigo incorrecto")
+                print("***********************")
+                print("1.volver a intentar")
+                print("2.volver al menu")
+                print("***********************")
+                opcion = input('¿digite el numero de la opcion?')
+                if(opcion == "1"):
+                    continue
+                elif(opcion == "2"):
+                    return -1
+                else:
+                    return -1            
+        else:
+            print("codigo incorrecto")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                return -1
+            else:
+                return -1
+    
 
 
+def consultarProductos():
+    mostrarLista(pasillos)
+    while(True):
+        codigoPasillo = input('¿Digite su codigo del pasillo')
+        listaCodigoPasillo = buscaEnLista2(productosPasillo,codigoPasillo,0)
+        
+        
+        if(listaCodigoPasillo != []):
+            mostrarLista(listaCodigoPasillo)
+            return -1
+
+                    
+        else:
+            print("codigo incorrecto")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                return -1
+            else:
+                return -1
+    
 
 
-
-
+    
 
 
 
@@ -696,10 +796,14 @@ def menuClienteRegistrado():
     opcion = input('¿digite el numero de la opcion?')
     if(opcion == "1"):
         print("Consultando precio")
+        consultarPrecio()
+        menuClienteRegistrado()
     elif(opcion == "2"):
         print("Consultando Descuentos")
     elif(opcion == "3"):
         print("Consultando productos")
+        consultarProductos()
+        menuClienteRegistrado()
     elif(opcion == "4"):
         print("Comprando")
     
@@ -718,13 +822,17 @@ def menuClienteNoRegistrado():
     print("***********************")
     print("1.Consultar precio")
     print("2.Consultar Productos")
-    print("3.volver al menu inicial")
+    print(" 3.volver al menu inicial")
     print("***********************")
     opcion = input('¿digite el numero de la opcion?')
     if(opcion == "1"):
         print("Consultando precio")
+        consultarPrecio()
+        menuClienteNoRegistrado()
     elif(opcion == "2"):
         print("Consultando productos")
+        consultarProductos()
+        menuClienteNoRegistrado()
     elif(opcion == "3"):
         menuQuienEntra()
     
