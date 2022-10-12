@@ -897,6 +897,7 @@ def menuClienteRegistrado(cedula):
             print("Tiene descuento de 5%")
         else:
             print("No tiene descuento")
+        menuClienteRegistrado(cedula)
     elif(opcion == "3"):
         print("Consultando productos")
         consultarProductos()
