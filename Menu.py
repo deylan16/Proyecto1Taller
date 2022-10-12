@@ -20,6 +20,7 @@ ClientesMontoComprados = []
 ProductoCantidaCargados = []
 ClientesFacturados = []
 FacturaMontoRealizadas = []
+cedulaFacturas = []
 #########################
 
 def mostrarLista(lista):
@@ -79,9 +80,9 @@ def verificaComprar():
         cedula = input('¿Digite su cedula?')
         if(buscaEnLista(clientes,cedula,0) != -1):
             print("El cliente esta registrado")
-            menuClienteRegistrado()
+            menuClienteRegistrado(cedula)
         else:
-            menuClienteNoRegistrado()
+            menuClienteNoRegistrado(cedula)
 def verificaAdministrador():
         codigo = input('¿Digite su codigo de administrador?')
         if(buscaEnLista(Administradores,codigo,0) != -1):
@@ -220,7 +221,8 @@ def OpcionesComprar(cedula):
             elif(opcion == "4"):
                 print("***********************")
                 print("Comprando")
-                codigoProducto = input('Ingrese el codigo de la marca que desea comprar')
+                productoscomprados += comprando(cedula)
+                """codigoProducto = input('Ingrese el codigo de la marca que desea comprar')
                 if(buscaEnLista(marcasProductos,codigoProducto,2) != -1):
                     cantidadProducto = input('Ingrese la cantidad que desea comprar')
                     if(verificaNumero(cantidadProducto)):
@@ -239,7 +241,7 @@ def OpcionesComprar(cedula):
                         continue
                 else:
                     print("El producto no se encuentra registrado")
-                    continue
+                    continue"""
             elif(opcion == "5"):
                 print("***********************")
                 print("Eliminando productos")
@@ -273,7 +275,7 @@ def OpcionesComprar(cedula):
                 break
                 #listaCompraCliente += [productoscomprados]
                 #registroTienda += [listaCompraCliente]
-        menu()
+        menuClienteRegistrado(cedula)
 
 def admministrador():
     while(True):
@@ -638,7 +640,91 @@ def Reportes():
         
     
 ##########################################################
-    
+def comprando(cedula):
+    productoscomprados = []
+    while(True):
+        
+        codigoPasillo = input('¿Digite su codigo del pasillo')
+        listaCodigoPasillo = buscaEnLista2(marcasProductos,codigoPasillo,0)
+        mostrarLista(listaCodigoPasillo)
+        
+        if(listaCodigoPasillo != []):
+            codigoProducto = input('¿Digite su codigo del producto')
+            listaCodigoPasilloCodigoProducto = buscaEnLista2(listaCodigoPasillo,codigoProducto,1)
+            mostrarLista(listaCodigoPasilloCodigoProducto)
+            if(listaCodigoPasilloCodigoProducto != []):
+                codigoMarca = input('¿Digite su codigo de Marca')
+                listaCodigoPasilloCodigoMarca = buscaEnLista2(listaCodigoPasilloCodigoProducto,codigoMarca,2)
+                if(listaCodigoPasilloCodigoMarca != []):
+                    print(listaCodigoPasilloCodigoMarca[0])
+                    cantidadProducto = input('Ingrese la cantidad que desea comprar')
+                    if(verificaNumero(cantidadProducto)):
+                        
+                        if ((int)(cantidadProducto) <= (int)(listaCodigoPasilloCodigoMarca[0][4])):
+                            
+                            productoscomprados += [[listaCodigoPasilloCodigoMarca[0][0],listaCodigoPasilloCodigoMarca[0][1],listaCodigoPasilloCodigoMarca[0][2],listaCodigoPasilloCodigoMarca[0][3],cantidadProducto,listaCodigoPasilloCodigoMarca[0][5]]]
+                            print("-----------------------------")
+                            mostrarLista(productoscomprados)
+                            continue
+                        else:
+                            print("No tenemos esa cantidad en gondola te puedo vender "+listaCodigoPasilloCodigoMarca[0][4])
+                            print("***********************")
+                            print("1.No")
+                            print("2.Si ")
+                            print("***********************")
+                            opcion = input('¿digite el numero de la opcion?')
+                            if(opcion == "1"):
+                                continue
+                            elif(opcion == "2"):
+                                productoscomprados += [[listaCodigoPasilloCodigoMarca[0][0],listaCodigoPasilloCodigoMarca[0][1],listaCodigoPasilloCodigoMarca[0][2],listaCodigoPasilloCodigoMarca[0][3],listaCodigoPasilloCodigoMarca[0][4],listaCodigoPasilloCodigoMarca[0][5]]]
+                                mostrarLista(productoscomprados)
+                                continue
+                            else:
+                                continue
+                            continue
+                    else:
+                        print("El dato ingresado es erroneo")
+                        continue
+                else:
+                    print("codigo incorrecto")
+                    print("***********************")
+                    print("1.volver a intentar")
+                    print("2.volver al menu")
+                    print("***********************")
+                    opcion = input('¿digite el numero de la opcion?')
+                    if(opcion == "1"):
+                        continue
+                    elif(opcion == "2"):
+                        return productoscomprados
+                    else:
+                        return productoscomprados   
+
+            else:
+                print("codigo incorrecto")
+                print("***********************")
+                print("1.volver a intentar")
+                print("2.volver al menu")
+                print("***********************")
+                opcion = input('¿digite el numero de la opcion?')
+                if(opcion == "1"):
+                    continue
+                elif(opcion == "2"):
+                    return productoscomprados
+                else:
+                    return productoscomprados            
+        else:
+            print("codigo incorrecto")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                return productoscomprados
+            else:
+                return productoscomprados    
         
 def consultarPrecio():
     mostrarLista(marcasProductos)
@@ -728,8 +814,15 @@ def consultarProductos():
                 return -1
     
 
-
-    
+def descuento(cedula):
+    contador  = 0
+    for i in ClientesFacturados:
+        if cedula == ClientesFacturados[0]:
+                contador += 1
+    if contador > 3:
+        return True
+    else:
+        return False    
 
 
 
@@ -783,7 +876,7 @@ def menuQuienEntra():
         print("El dato ingresado no es permitido")
         menuQuienEntra()
 
-def menuClienteRegistrado():
+def menuClienteRegistrado(cedula):
     print("----------------------------------")
     print("Estas en el menu de cliente registrado")
     print("----------------------------------")
@@ -800,12 +893,17 @@ def menuClienteRegistrado():
         menuClienteRegistrado()
     elif(opcion == "2"):
         print("Consultando Descuentos")
+        if descuento(cedula):
+            print("Tiene descuento de 5%")
+        else:
+            print("No tiene descuento")
     elif(opcion == "3"):
         print("Consultando productos")
         consultarProductos()
         menuClienteRegistrado()
     elif(opcion == "4"):
         print("Comprando")
+        OpcionesComprar(cedula)
     
     elif(opcion == "5"):
         menuQuienEntra()
@@ -816,7 +914,7 @@ def menuClienteRegistrado():
         menuClienteNoRegistrado()
     print("----------------------------------")
 
-def menuClienteNoRegistrado():
+def menuClienteNoRegistrado(cedula):
     print("----------------------------------")
     print("Estas en el menu de cliente no registrado")
     print("***********************")

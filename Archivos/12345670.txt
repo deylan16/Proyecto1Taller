@@ -3,6 +3,6 @@ Cedula:1234567
 Consecutivo:0
 Marca:CantidadxPrecio+= total
 
-Luisiana:1x1000 = 1000
+Rojitos:5x1500+ 13% = 8475.0
 
-Monto total:1000
+Monto total:8475.0
