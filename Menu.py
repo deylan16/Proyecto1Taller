@@ -181,7 +181,7 @@ def facturar():
         menu()
     else:
         print("No hay facturas pendientes")
-        menu()
+        menuAdministrador()
 
 
 
@@ -293,7 +293,7 @@ def admministrador():
                 continue
             elif(opcion == "2"):
                 break
-    menu()
+    menuAdministrador()
         
             
 def RevisarGondolas():
@@ -343,7 +343,7 @@ def RevisarGondolas():
         print("Lista del inventario")
         print("----------------")
         mostrarLista(inventarios)
-        menu()
+        menuAdministrador()
     
 
    
@@ -370,7 +370,7 @@ def VerificarInventario():
                         print("El dato ingresado es erroneo")
                         continue
         mostrarLista(inventarios)
-        menu()
+        menuAdministrador()
 
 
 
@@ -636,7 +636,7 @@ def Reportes():
                 else:
                     print("El dato ingresado no es permitido")
                     break
-    menu()
+    menuAdministrador()
         
     
 ##########################################################
@@ -946,7 +946,7 @@ def menuAdministrador():
     print("Estas en el menu de administrador")
     print("*********************************")
     print("1.Mantenimiento de la Base de Datos")
-    print("\ta.Insertatar Producto nuevo")
+    print("\ta.Insertar Producto nuevo")
     print("\tb.Eliminar un Producto")
     print("\tc.Modificar un producto de una marca,modificando el precio o el nombre")
     print("\td.Consultar Precio")
@@ -963,7 +963,7 @@ def menuAdministrador():
     if (opcion=="1"):
         print("Mantenimiento de la Base de Datos")
     elif (opcion=="a"):
-        print("Insertatar Producto nuevo")
+        print("Insertar Producto nuevo")
     elif (opcion=="b"):
         print("Eliminar un Producto")
     elif (opcion=="c"):
@@ -985,7 +985,7 @@ def menuAdministrador():
     elif (opcion=="5"):
         Reportes()
     elif (opcion=="6"):
-        menuAdmimnistrador()
+        menuAdministrador()
     else:
         print("El dato ingresado no es permitido")    
 menuQuienEntra()
