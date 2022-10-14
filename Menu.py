@@ -921,7 +921,7 @@ def menuClienteNoRegistrado(cedula):
     print("***********************")
     print("1.Consultar precio")
     print("2.Consultar Productos")
-    print(" 3.volver al menu inicial")
+    print("3.volver al menu inicial")
     print("***********************")
     opcion = input('¿digite el numero de la opcion?')
     if(opcion == "1"):
@@ -940,6 +940,115 @@ def menuClienteNoRegistrado(cedula):
         print("El dato ingresado no es permitido")
         menuClienteNoRegistrado()
     print("----------------------------------")
+
+def insertarProductonuevo():
+    mostrarLista(pasillos)
+    while(True):
+        CodigoPasillo=input('¿digite su codigo del Pasillo?')
+        listaCodigoPasillo=buscaEnLista2(pasillos,CodigoPasillo,0)
+        if (listaCodigoPasillo)!=[]:
+            mostrarLista(listaCodigoPasillo)
+            CodigoProducto=input('¿digite su codigo del Producto?')
+            listaCodigoProducto=buscaEnLista2(productosPasillo,CodigoProducto,0)
+            if (listaCodigoProducto)!=[]:
+                mostrarLista(listaCodigoProducto)
+                CodigoMarca=input('¿digite su codigo de Marca?')
+                listaCodigoMarcas=buscaEnLista2(marcasProductos,CodigoMarca,0)
+                if (listaCodigoMarcas)!=[]:
+                    nombre==input('¿digite el nombre')
+                    while(True):
+                        cantidadGondola=input('¿digite la cantidad Gondola que desea')
+                        if verificaNumero(cantidadGondola)==True:
+                            return -1
+                        else:
+                            print("El dato ingresado no es un numero")
+                            continue
+                    while(True):
+                        precio=input('¿digite el precio que desea')
+                        if verificaNumero(precio)==True:
+                            return -1
+                        else:
+                            print("El dato ingresado no es un numero")
+                            continue       
+                    while(True):
+                        cantidadStock=input('¿digite la cantidad de Stock que desea')
+                        if verificaNumero(cantidadStock)==True:
+                            return -1
+                        else:
+                            print("El dato ingresado no es un numero")
+                            continue  
+                    while(True):
+                        codigoCanasta=input('¿digite la codigo Canasta que desea')
+                        if verificaNumero(codigoCanasta)==True:
+                            return -1
+                        else:
+                            print("El dato ingresado no es un numero")
+                            if codigoCanasta==0 or codigoCanasta==1:
+                                print("Es de la Canasta Básica")
+                            else:
+                                print("No es de la Canasta Básica")
+                                continue 
+
+                else:
+                    print("codigo incorrecto")
+                    print("***********************")
+                    print("1.volver a intentar")
+                    print("2.volver al menu")
+                    print("***********************")
+                    opcion = input('¿digite el numero de la opcion?')
+                    if(opcion == "1"):
+                        continue
+                    elif(opcion == "2"):
+                        return -1
+                    else:
+                        return -1
+            else:
+                print("codigo incorrecto")
+                print("***********************")
+                print("1.volver a intentar")
+                print("2.volver al menu")
+                print("***********************")
+                opcion = input('¿digite el numero de la opcion?')
+                if(opcion == "1"):
+                    continue
+                elif(opcion == "2"):
+                    return -1
+                else:
+                    return -1
+        else:
+            print("codigo incorrecto")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                return -1
+            else:
+                return -1
+    menuAdministrador()
+        
+        
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def menuAdministrador():
     print("----------------------------------")
@@ -964,7 +1073,9 @@ def menuAdministrador():
         print("Mantenimiento de la Base de Datos")
     elif (opcion=="a"):
         print("Insertar Producto nuevo")
+        insertarProductonuevo()
     elif (opcion=="b"):
+        
         print("Eliminar un Producto")
     elif (opcion=="c"):
         print("Modificar un producto de una marca,modificando el precio o el nombre")
