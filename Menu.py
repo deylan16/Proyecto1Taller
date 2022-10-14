@@ -163,7 +163,7 @@ def facturar():
                 string += (str)(total)
                 precioTotal += total
             else:
-                string += 
+                
                 total = ((int)(facturando[1][i][4])*(int)(facturando[1][i][5]))
                 string += (str)(total)
                 precioTotal += total
