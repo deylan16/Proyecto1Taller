@@ -1,8 +1,12 @@
-Nombre:Juan Perez
+Consecutivo Factura: #3
+
 Cedula:1234567
-Consecutivo:0
-Marca:CantidadxPrecio+= total
+Nombre:Juan Perez
+Telefono:23658974
 
-Rojitos:5x1500+ 13% = 8475.0
+Producto	Cantidad	Precio Unitario	totalSalSol	5
+200 = 1000
 
-Monto total:8475.0
+Total:1000
+Descuento:0%
+Total a Pagar:1000

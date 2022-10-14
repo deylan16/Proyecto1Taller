@@ -21,6 +21,8 @@ ProductoCantidaCargados = []
 ClientesFacturados = []
 FacturaMontoRealizadas = []
 cedulaFacturas = []
+cantidadDescuento = 3
+porcentajeDescuento = 5
 #########################
 
 def mostrarLista(lista):
@@ -119,20 +121,27 @@ def facturar():
     global ProductoCantidaCargados,ClientesFacturados,FacturaMontoRealizadas
     if(len(registroTienda) != 0):
         facturando = registroTienda[0]
-        factura = open("Archivos/"+facturando[0]+(str)(consecutivo) +".txt", "w")
+        factura = open("Archivos/"+facturando[0]+(str)(cantidadFacturas(facturando[0])) +".txt", "w")
         i = 0
 
         nombre = buscaEnLista(clientes,facturando[0],0)
-        
-        factura.write("Nombre:"+ clientes[nombre][1] + "\n")
-        factura.write("Cedula:"+ facturando[0] + "\n")
-        factura.write("Consecutivo:"+ (str)(consecutivo) + "\n")
-        factura.write("Marca:CantidadxPrecio+= total" + "\n")
+        factura.write("Consecutivo Factura: #"+ (str)(cantidadFacturas(facturando[0])) + "\n")
         factura.write("\n")
+        factura.write("Cedula:"+ facturando[0] + "\n")
+        factura.write("Nombre:"+ clientes[nombre][1] + "\n")
+        factura.write("Telefono:"+ clientes[nombre][2] + "\n")
+        factura.write("\n")
+        factura.write("Producto\tCantidad\tPrecio Unitario\ttotal\n")
+        
+        
+        #factura.write("Marca:CantidadxPrecio+= total" + "\n")
+        #factura.write("\n")
         precioTotal = 0
         while (i< len(facturando[1])):
-  
-            string = facturando[1][i][3]+ ":" +facturando[1][i][4] + "x" + facturando[1][i][5]
+            cantidad = facturando[1][i][4] 
+            precio = facturando[1][i][5]
+            producto = facturando[1][i][3]
+            string = ""+producto+"\t"+cantidad+"\n"+precio
             ListaProductos += [[facturando[1][i][2],facturando[1][i][4]]]
             productoMarca1 = buscaEnLista(marcasProductos,facturando[1][i][2],2)
             print(marcasProductos[productoMarca1][4] )
@@ -149,12 +158,12 @@ def facturar():
             
             #################
             if (tiene13(facturando[1][i][2]) ):
-                string += "+ 13% = "
+                string += "+ 13% \t "
                 total = ((int)(facturando[1][i][4])*(int)(facturando[1][i][5]))* 1.13
                 string += (str)(total)
                 precioTotal += total
             else:
-                string += " = "
+                string += 
                 total = ((int)(facturando[1][i][4])*(int)(facturando[1][i][5]))
                 string += (str)(total)
                 precioTotal += total
@@ -163,7 +172,16 @@ def facturar():
 
             i+= 1
         factura.write("\n")
-        factura.write("Monto total:"+ (str)(precioTotal) + "\n")
+        factura.write("Total:"+ (str)(precioTotal) + "\n")
+        if(descuento(facturando[0])):
+            factura.write("Descuento:"+ (str)(porcentajeDescuento) + "%\n")
+            factura.write("Total a Pagar:"+ (str)(precioTotal-(precioTotal *(porcentajeDescuento/100))) + "\n")
+        else:
+            factura.write("Descuento:"+ (str)(0) + "%\n")
+            factura.write("Total a Pagar:"+ (str)(precioTotal) + "\n")
+        
+
+
         #######para reportes#####
         indiceClienteMonto = buscaEnLista(ClientesMontoComprados,facturando[0],0)
         if(indiceClienteMonto != -1):
@@ -178,7 +196,7 @@ def facturar():
         RegistroTodasCompras += registroTienda[0]
         registroTienda = registroTienda[1:]
         
-        menu()
+        menuAdministrador()
     else:
         print("No hay facturas pendientes")
         menuAdministrador()
@@ -812,14 +830,20 @@ def consultarProductos():
                 return -1
             else:
                 return -1
-    
+
+def cantidadFacturas(cedula):
+    contador  = 0
+    for i in ClientesFacturados:
+        if cedula == ClientesFacturados[0]:
+                contador += 1
+    return contador
 
 def descuento(cedula):
     contador  = 0
     for i in ClientesFacturados:
         if cedula == ClientesFacturados[0]:
                 contador += 1
-    if contador > 3:
+    if contador >= cantidadDescuento:
         return True
     else:
         return False    
@@ -894,7 +918,7 @@ def menuClienteRegistrado(cedula):
     elif(opcion == "2"):
         print("Consultando Descuentos")
         if descuento(cedula):
-            print("Tiene descuento de 5%")
+            print("Tiene descuento de "+porcentajeDescuento+"%")
         else:
             print("No tiene descuento")
         menuClienteRegistrado(cedula)
@@ -942,6 +966,7 @@ def menuClienteNoRegistrado(cedula):
     print("----------------------------------")
 
 def insertarProductonuevo():
+    global marcasProductos,inventarios
     mostrarLista(pasillos)
     while(True):
         CodigoPasillo=input('¿digite su codigo del Pasillo?')
@@ -955,39 +980,47 @@ def insertarProductonuevo():
                 CodigoMarca=input('¿digite su codigo de Marca?')
                 listaCodigoMarcas=buscaEnLista2(marcasProductos,CodigoMarca,0)
                 if (listaCodigoMarcas)!=[]:
-                    nombre==input('¿digite el nombre')
+                    nombre=input('¿digite el nombre')
+                    productoNuevoMarcasProductos = [CodigoPasillo,CodigoProducto,CodigoMarca,nombre]
+                    productoNuevoInventario= [CodigoPasillo,CodigoProducto,CodigoMarca,nombre]
                     while(True):
                         cantidadGondola=input('¿digite la cantidad Gondola que desea')
                         if verificaNumero(cantidadGondola)==True:
-                            return -1
+                            productoNuevoMarcasProductos+=[cantidadGondola]
+                            break
                         else:
                             print("El dato ingresado no es un numero")
                             continue
                     while(True):
                         precio=input('¿digite el precio que desea')
                         if verificaNumero(precio)==True:
-                            return -1
+                            productoNuevoMarcasProductos +=[precio]
+                            break
                         else:
                             print("El dato ingresado no es un numero")
                             continue       
                     while(True):
                         cantidadStock=input('¿digite la cantidad de Stock que desea')
                         if verificaNumero(cantidadStock)==True:
-                            return -1
+                            productoNuevoInventario += [cantidadStock]
+                            break
                         else:
                             print("El dato ingresado no es un numero")
                             continue  
                     while(True):
-                        codigoCanasta=input('¿digite la codigo Canasta que desea')
-                        if verificaNumero(codigoCanasta)==True:
-                            return -1
-                        else:
+                            codigoCanasta=input('¿digite la codigo Canasta que desea')
                             print("El dato ingresado no es un numero")
-                            if codigoCanasta==0 or codigoCanasta==1:
-                                print("Es de la Canasta Básica")
+                            if codigoCanasta=="0" or codigoCanasta=="1":
+                                print("Codigo recibido ")
+                                productoNuevoInventario += [codigoCanasta]
+                                break
+                                
                             else:
-                                print("No es de la Canasta Básica")
+                                print("Codigo no permitido")
                                 continue 
+                    marcasProductos += [productoNuevoMarcasProductos]
+                    inventarios += [productoNuevoInventario]
+                    break
 
                 else:
                     print("codigo incorrecto")
@@ -1030,27 +1063,194 @@ def insertarProductonuevo():
                 return -1
     menuAdministrador()
         
+def eliminarProducto():
+    mostrarLista(marcasProductos)
+    while(True):
+        codigoPasillo = input('¿Digite su codigo del pasillo')
+        listaCodigoPasillo = buscaEnLista2(marcasProductos,codigoPasillo,0)
+        mostrarLista(listaCodigoPasillo)
         
+        if(listaCodigoPasillo != []):
+            codigoProducto = input('¿Digite su codigo del producto')
+            listaCodigoPasilloCodigoProducto = buscaEnLista2(listaCodigoPasillo,codigoProducto,1)
+            mostrarLista(listaCodigoPasilloCodigoProducto)
+            if(listaCodigoPasilloCodigoProducto != []):
+                codigoMarca = input('¿Digite su codigo de Marca')
+                listaCodigoPasilloCodigoMarca = buscaEnLista2(listaCodigoPasilloCodigoProducto,codigoMarca,2)
+                if(listaCodigoPasilloCodigoMarca != []):
+                    print(listaCodigoPasilloCodigoMarca[0])
+                    print("1.Si")
+                    print("2.No")
+                    eliminar = input("Desea eliminar el producto ")
+                    if eliminar == "1":
+                        print("Eliminando producto")
+                        posMarcasProductos = buscaEnLista(marcasProductos,codigoMarca,2)
+                        posInventario = buscaEnLista(inventarios,codigoMarca,2)
+                        marcasProductos.pop(posMarcasProductos)
+                        inventarios.pop(posInventario)
+                        
+                    else:
+                        print("No se elimino el producto")
+                        return -1
+
+                    
+                    
+                    return -1
+                else:
+                    print("codigo incorrecto")
+                    print("***********************")
+                    print("1.volver a intentar")
+                    print("2.volver al menu")
+                    print("***********************")
+                    opcion = input('¿digite el numero de la opcion?')
+                    if(opcion == "1"):
+                        continue
+                    elif(opcion == "2"):
+                        return -1
+                    else:
+                        return -1   
+
+            else:
+                print("codigo incorrecto")
+                print("***********************")
+                print("1.volver a intentar")
+                print("2.volver al menu")
+                print("***********************")
+                opcion = input('¿digite el numero de la opcion?')
+                if(opcion == "1"):
+                    continue
+                elif(opcion == "2"):
+                    return -1
+                else:
+                    return -1            
+        else:
+            print("codigo incorrecto")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                return -1
+            else:
+                return -1
     
+def ModificarProducto():
     
+    mostrarLista(marcasProductos)
+    while(True):
+        codigoPasillo = input('¿Digite su codigo del pasillo')
+        listaCodigoPasillo = buscaEnLista2(marcasProductos,codigoPasillo,0)
+        mostrarLista(listaCodigoPasillo)
+        
+        if(listaCodigoPasillo != []):
+            codigoProducto = input('¿Digite su codigo del producto')
+            listaCodigoPasilloCodigoProducto = buscaEnLista2(listaCodigoPasillo,codigoProducto,1)
+            mostrarLista(listaCodigoPasilloCodigoProducto)
+            if(listaCodigoPasilloCodigoProducto != []):
+                codigoMarca = input('¿Digite su codigo de Marca')
+                listaCodigoPasilloCodigoMarca = buscaEnLista2(listaCodigoPasilloCodigoProducto,codigoMarca,2)
+                if(listaCodigoPasilloCodigoMarca != []):
+                    nombre =input('digite el nombre que desea')
+                    precio = 0
+                    while(True):
+                        precio=input('¿digite el precio que desea')
+                        if verificaNumero(precio)==True:
+                            break
+                        else:
+                            print("El dato ingresado no es un numero")
+                            continue       
+                    posMarcasProductos = buscaEnLista(marcasProductos,codigoMarca,2)
+                    posInventario = buscaEnLista(inventarios,codigoMarca,2)
+                    marcasProductos[posMarcasProductos][3] = nombre
+                    marcasProductos[posMarcasProductos][5] = precio
+                    inventarios[posInventario][3]
+                    
+
+
+                    
+                    
+                    
+                else:
+                    print("codigo incorrecto")
+                    print("***********************")
+                    print("1.volver a intentar")
+                    print("2.volver al menu")
+                    print("***********************")
+                    opcion = input('¿digite el numero de la opcion?')
+                    if(opcion == "1"):
+                        continue
+                    elif(opcion == "2"):
+                        return -1
+                    else:
+                        return -1   
+
+            else:
+                print("codigo incorrecto")
+                print("***********************")
+                print("1.volver a intentar")
+                print("2.volver al menu")
+                print("***********************")
+                opcion = input('¿digite el numero de la opcion?')
+                if(opcion == "1"):
+                    continue
+                elif(opcion == "2"):
+                    return -1
+                else:
+                    return -1            
+        else:
+            print("codigo incorrecto")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                return -1
+            else:
+                return -1
+
+def registrarCiente():
+    global clientes
+    while(True):
+        cedulaNueva = input('¿Digite su cedula')
+        listacliente = buscaEnLista2(clientes,cedulaNueva,0)
+        
+        
+        if(listacliente == []):
+            if (verificaNumero(cedulaNueva)):
+                nombreCliente = input("Ingresa el nombre")
+                celularCliente = input("Tu numero de celular")
+                correoCliente = input("Tu numero de correo")
+                clientes += [[cedulaNueva,nombreCliente,celularCliente,correoCliente]]
+                mostrarLista(clientes)
+                return -1
+            else:
+                print("La cedula solo puede tener numeros")
+                continue
+           
+        else:
+            print("Esa cedula ya esta registrada")
+            print("***********************")
+            print("1.volver a intentar")
+            print("2.volver al menu")
+            print("***********************")
+            opcion = input('¿digite el numero de la opcion?')
+            if(opcion == "1"):
+                continue
+            elif(opcion == "2"):
+                return -1
+            else:
+                return -1
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def menuAdministrador():
+    global cantidadDescuento
+    global porcentajeDescuento
     print("----------------------------------")
     print("Estas en el menu de administrador")
     print("*********************************")
@@ -1077,16 +1277,45 @@ def menuAdministrador():
     elif (opcion=="b"):
         
         print("Eliminar un Producto")
+        eliminarProducto()
+        menuAdministrador()
     elif (opcion=="c"):
         print("Modificar un producto de una marca,modificando el precio o el nombre")
+        ModificarProducto()
+        menuAdministrador()
     elif (opcion=="d"):
         print("Consultar Precio")
+        consultarPrecio()
     elif (opcion=="e"):
         print("Consultar Descuento")
+        print("El descuento es de "+(str)(porcentajeDescuento)+"%")
+        print("Se aplica despues de la factura numero "+(str)(cantidadDescuento))
+        menuAdministrador()
     elif (opcion=="f"):
         print("Modicar el Descuento")
+        while(True):
+            CantidadFacturas=input('digite el numero de facturas requerido para aplicar descuento')
+            if verificaNumero(CantidadFacturas)==True:
+                cantidadDescuento =  (int)(CantidadFacturas)
+                print("Se cambio a que se aplique un descuento despues de la factura numero" + (str)(cantidadDescuento))
+                break
+            else:
+                print("El dato ingresado no es un numero")
+                continue
+        while(True):
+            CantidadPorcentaje=input('digite el numero del descuento a aplicar')
+            if verificaNumero(CantidadPorcentaje)==True:
+                porcentajeDescuento =  (int)(CantidadPorcentaje)
+                print("Se aplica un decuento de "+(str)(CantidadPorcentaje)+"%")
+                break
+            else:
+                print("El dato ingresado no es un numero")
+                continue
+        menuAdministrador()      
     elif (opcion=="g"):
         print("Registrar Clientes")
+        registrarCiente()
+        menuAdministrador()
     elif (opcion=="2"):
         facturar()
     elif (opcion=="3"):
@@ -1096,7 +1325,7 @@ def menuAdministrador():
     elif (opcion=="5"):
         Reportes()
     elif (opcion=="6"):
-        menuAdministrador()
+        menuQuienEntra()
     else:
         print("El dato ingresado no es permitido")    
 menuQuienEntra()
