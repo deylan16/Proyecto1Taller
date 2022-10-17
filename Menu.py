@@ -883,7 +883,7 @@ def menu():
 
 def menuQuienEntra():
     print("----------------------------------")
-    print("Estas en el menu para elejir quien entra")
+    print("Estas en el menu para elegir quien entra")
     print("----------------------------------")
     print("***********************")
     print("1.Administrador")
@@ -914,7 +914,7 @@ def menuClienteRegistrado(cedula):
     if(opcion == "1"):
         print("Consultando precio")
         consultarPrecio()
-        menuClienteRegistrado()
+        menuClienteRegistrado(cedula)
     elif(opcion == "2"):
         print("Consultando Descuentos")
         if descuento(cedula):
@@ -925,7 +925,7 @@ def menuClienteRegistrado(cedula):
     elif(opcion == "3"):
         print("Consultando productos")
         consultarProductos()
-        menuClienteRegistrado()
+        menuClienteRegistrado(cedula)
     elif(opcion == "4"):
         print("Comprando")
         OpcionesComprar(cedula)
