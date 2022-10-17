@@ -683,7 +683,17 @@ def comprando(cedula):
                             productoscomprados += [[listaCodigoPasilloCodigoMarca[0][0],listaCodigoPasilloCodigoMarca[0][1],listaCodigoPasilloCodigoMarca[0][2],listaCodigoPasilloCodigoMarca[0][3],cantidadProducto,listaCodigoPasilloCodigoMarca[0][5]]]
                             print("-----------------------------")
                             mostrarLista(productoscomprados)
-                            continue
+                            print("***********************")
+                            print("1.Seguir Comprando")
+                            print("2.volver al menu")
+                            print("***********************")
+                            opcion = input('¿digite el numero de la opcion?')
+                            if(opcion == "1"):
+                                    comprando(cedula)
+                            elif(opcion == "2"):
+                                    OpcionesComprar(cedula)
+                            else:
+                                return OpcionesComprar(cedula)
                         else:
                             print("No tenemos esa cantidad en gondola te puedo vender "+listaCodigoPasilloCodigoMarca[0][4])
                             print("***********************")
@@ -692,14 +702,44 @@ def comprando(cedula):
                             print("***********************")
                             opcion = input('¿digite el numero de la opcion?')
                             if(opcion == "1"):
-                                continue
+                                print("***********************")
+                                print("1.Seguir Comprando")
+                                print("2.volver al menu")
+                                print("***********************")
+                                opcion = input('¿digite el numero de la opcion?')
+                                if(opcion == "1"):
+                                    comprando(cedula)
+                                elif(opcion == "2"):
+                                    OpcionesComprar(cedula)
+                                else:
+                                    return OpcionesComprar(cedula)
                             elif(opcion == "2"):
                                 productoscomprados += [[listaCodigoPasilloCodigoMarca[0][0],listaCodigoPasilloCodigoMarca[0][1],listaCodigoPasilloCodigoMarca[0][2],listaCodigoPasilloCodigoMarca[0][3],listaCodigoPasilloCodigoMarca[0][4],listaCodigoPasilloCodigoMarca[0][5]]]
                                 mostrarLista(productoscomprados)
-                                continue
+                                print("***********************")
+                                print("1.Seguir Comprando")
+                                print("2.volver al menu")
+                                print("***********************")
+                                opcion = input('¿digite el numero de la opcion?')
+                                if(opcion == "1"):
+                                    comprando(cedula)
+                                elif(opcion == "2"):
+                                    OpcionesComprar(cedula)
+                                else:
+                                    return OpcionesComprar(cedula)
                             else:
-                                continue
-                            continue
+                                print("***********************")
+                                print("1.Seguir Comprando")
+                                print("2.volver al menu")
+                                print("***********************")
+                                opcion = input('¿digite el numero de la opcion?')
+                                if(opcion == "1"):
+                                    comprando(cedula)
+                                elif(opcion == "2"):
+                                    OpcionesComprar(cedula)
+                                else:
+                                    return OpcionesComprar(cedula)
+                            
                     else:
                         print("El dato ingresado es erroneo")
                         continue
