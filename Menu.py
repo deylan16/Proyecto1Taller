@@ -979,7 +979,7 @@ def insertarProductonuevo():
                 mostrarLista(listaCodigoProducto)
                 CodigoMarca=input('¿digite su codigo de Marca?')
                 listaCodigoMarcas=buscaEnLista2(marcasProductos,CodigoMarca,0)
-                if (listaCodigoMarcas)!=[]:
+                if (listaCodigoMarcas)==[]:
                     nombre=input('¿digite el nombre')
                     productoNuevoMarcasProductos = [CodigoPasillo,CodigoProducto,CodigoMarca,nombre]
                     productoNuevoInventario= [CodigoPasillo,CodigoProducto,CodigoMarca,nombre]
