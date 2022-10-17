@@ -99,7 +99,7 @@ def verificaAdministrador():
             print("***********************")
             opcion = input('¿digite el numero de la opcion?')
             if(opcion == "1"):
-                verificaComprar()
+                verificaAdministrador()
             elif(opcion == "2"):
                 menuQuienEntra()
             else:
@@ -951,18 +951,18 @@ def menuClienteNoRegistrado(cedula):
     if(opcion == "1"):
         print("Consultando precio")
         consultarPrecio()
-        menuClienteNoRegistrado()
+        menuClienteNoRegistrado(cedula)
     elif(opcion == "2"):
         print("Consultando productos")
         consultarProductos()
-        menuClienteNoRegistrado()
+        menuClienteNoRegistrado(cedula)
     elif(opcion == "3"):
         menuQuienEntra()
     
     
     else:
         print("El dato ingresado no es permitido")
-        menuClienteNoRegistrado()
+        menuClienteNoRegistrado(cedula)
     print("----------------------------------")
 
 def insertarProductonuevo():
@@ -1286,6 +1286,7 @@ def menuAdministrador():
     elif (opcion=="d"):
         print("Consultar Precio")
         consultarPrecio()
+        menuAdministrador()
     elif (opcion=="e"):
         print("Consultar Descuento")
         print("El descuento es de "+(str)(porcentajeDescuento)+"%")
